@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.*
+*.local
+.vite/
+npm-debug.log*
+.DS_Store
+
+/spec
+CLAUDE.md
+GOALS.md
