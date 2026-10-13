@@ -1,3 +1,6 @@
+import { useLocale } from '../i18n/useLocale.ts'
+
 export function Contact() {
-  return <h1>Contact</h1>
+  const { t } = useLocale()
+  return <h1>{t.contact.title}</h1>
 }

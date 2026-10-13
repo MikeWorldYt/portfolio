@@ -1,3 +1,12 @@
+import { LocaleSwitch } from '../components/layout/LocaleSwitch.tsx'
+import { useLocale } from '../i18n/useLocale.ts'
+
 export function Home() {
-  return <h1>Home</h1>
+  const { t } = useLocale()
+  return (
+    <>
+      <LocaleSwitch />
+      <h1>{t.home.title}</h1>
+    </>
+  )
 }
