@@ -16,7 +16,7 @@ export function Projects() {
       <p className="mb-4">{t.projects.intro}</p>
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
-          <Reveal key={project} delay={index * 120}>
+          <Reveal key={project.id} delay={index * 120}>
             <ProjectCard project={project} />
           </Reveal>
         ))}
