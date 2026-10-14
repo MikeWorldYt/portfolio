@@ -6,8 +6,14 @@ export const es: Dictionary = {
   },
   nav: {
     label: 'Principal',
-    home: 'Inicio',
-    contact: 'Contacto',
+    items: {
+      home: 'Inicio',
+      skills: 'Skills',
+      technologies: 'Tech',
+      projects: 'Proyectos',
+      social: 'Redes',
+      contact: 'Contacto',
+    },
     skipToContent: 'Saltar al contenido',
   },
   footer: {

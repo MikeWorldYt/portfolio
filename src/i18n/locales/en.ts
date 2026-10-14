@@ -4,8 +4,14 @@ export const en = {
   },
   nav: {
     label: 'Main',
-    home: 'Home',
-    contact: 'Contact',
+    items: {
+      home: 'Home',
+      skills: 'Skills',
+      technologies: 'Tech',
+      projects: 'Projects',
+      social: 'Social',
+      contact: 'Contact',
+    },
     skipToContent: 'Skip to content',
   },
   footer: {
