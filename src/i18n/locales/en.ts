@@ -16,7 +16,7 @@ export const en = {
   },
   home: {
     tag: 'Product Engineer · UX',
-    title: 'Hi, I am PJ.',
+    title: 'Hi, I\'m Mike',
     intro: 'I build digital products with UX vision and technical depth, accelerated with AI.',
     cta: 'Let us talk',
     scroll: 'Scroll',

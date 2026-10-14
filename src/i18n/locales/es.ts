@@ -18,7 +18,7 @@ export const es: Dictionary = {
   },
   home: {
     tag: 'Product Engineer · UX',
-    title: 'Hola, soy PJ.',
+    title: 'Hola, soy Mike',
     intro: 'Construyo productos digitales con visión de UX y profundidad técnica, acelerados con IA.',
     cta: 'Hablemos',
     scroll: 'Scroll',
