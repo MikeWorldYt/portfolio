@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 type ButtonProps = {
   to: string
-  variant?: 'primary' | 'outline'
+  variant?: 'primary' | 'outline' | 'light'
   children: ReactNode
 }
 
@@ -13,6 +13,7 @@ const base =
 const variants = {
   primary: 'bg-indigo-600 text-white',
   outline: 'border border-indigo-600 text-indigo-600',
+  light: 'bg-white text-indigo-600',
 }
 
 export function Button({ to, variant = 'primary', children }: ButtonProps) {
