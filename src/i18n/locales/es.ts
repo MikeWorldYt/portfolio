@@ -4,6 +4,10 @@ export const es: Dictionary = {
   site: {
     name: 'Portafolio',
   },
+  meta: {
+    title: 'Mike | Product Engineer · UX',
+    description: 'Portafolio de un Product Engineer: productos digitales con visión de UX y profundidad técnica, acelerados con IA.',
+  },
   nav: {
     label: 'Principal',
     items: {

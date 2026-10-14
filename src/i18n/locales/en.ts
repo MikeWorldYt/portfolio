@@ -2,6 +2,10 @@ export const en = {
   site: {
     name: 'Portfolio',
   },
+  meta: {
+    title: 'Mike | Product Engineer · UX',
+    description: 'Portfolio of a Product Engineer: digital products with UX vision and technical depth, accelerated with AI.',
+  },
   nav: {
     label: 'Main',
     items: {

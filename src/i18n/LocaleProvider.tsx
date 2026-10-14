@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
+import { applyMeta } from './applyMeta.ts'
 import { detectLocale, storeLocale } from './detectLocale.ts'
 import { LocaleContext } from './localeContext.ts'
 import type { Dictionary, Locale } from './types.ts'
@@ -13,6 +14,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = locale
+    applyMeta(dictionaries[locale].meta)
     storeLocale(locale)
   }, [locale])
 
