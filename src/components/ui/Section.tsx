@@ -1,9 +1,20 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, Ref } from 'react'
+import { Fidelity } from './Fidelity.tsx'
+import type { FidelityLevel } from './Fidelity.tsx'
 
-export function Section({ id, children }: { id: string; children: ReactNode }) {
+type SectionProps = {
+  id: string
+  level: FidelityLevel
+  ref?: Ref<HTMLElement>
+  children: ReactNode
+}
+
+export function Section({ id, level, ref, children }: SectionProps) {
   return (
-    <section id={id} className="flex min-h-[70vh] flex-col justify-center py-16 md:py-24">
-      <div className="mx-auto w-full max-w-4xl">{children}</div>
+    <section ref={ref} id={id} className="flex min-h-[70vh] flex-col justify-center py-16 md:py-24">
+      <Fidelity level={level} className="mx-auto w-full max-w-4xl">
+        {children}
+      </Fidelity>
     </section>
   )
 }
