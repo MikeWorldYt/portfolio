@@ -45,7 +45,7 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
             </Button>
           </div>
         </div>
-        <p className="text-center text-sm opacity-70">↓ {t.home.scroll}</p>
+        <p className="text-center text-sm opacity-80">↓ {t.home.scroll}</p>
       </Fidelity>
     </section>
   )
