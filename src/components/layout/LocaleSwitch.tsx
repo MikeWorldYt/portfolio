@@ -1,6 +1,6 @@
 import { useLocale } from '../../i18n/useLocale.ts'
 
-export function LocaleSwitch() {
+export function LocaleSwitch({ className = '' }: { className?: string }) {
   const { locale, setLocale, t } = useLocale()
   const next = locale === 'en' ? 'es' : 'en'
 
@@ -10,7 +10,7 @@ export function LocaleSwitch() {
       lang={next}
       aria-label={t.localeSwitch.label}
       onClick={() => setLocale(next)}
-      className="rounded border px-2 py-1 text-sm font-medium uppercase focus-visible:outline-2 focus-visible:outline-offset-2"
+      className={`fx px-3 py-1.5 text-xs font-bold uppercase focus-visible:outline-2 focus-visible:outline-offset-2 ${className}`}
     >
       {next}
     </button>
