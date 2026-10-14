@@ -3,6 +3,7 @@ import { Layout } from './components/layout/Layout.tsx'
 import { Contact } from './routes/Contact.tsx'
 import { Home } from './routes/Home.tsx'
 import { NotFound } from './routes/NotFound.tsx'
+import { ProjectsPage } from './routes/ProjectsPage.tsx'
 
 export function App() {
   return (
@@ -10,6 +11,7 @@ export function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>
