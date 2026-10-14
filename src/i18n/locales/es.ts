@@ -17,6 +17,9 @@ export const es: Dictionary = {
     label: 'Cambiar idioma',
   },
   home: {
+    wireTag: '[ Hero · Sobre mí ]',
+    wireRole: 'Product Engineer',
+    wireCta: '[ CTA ]',
     tag: 'Product Engineer · UX',
     title: 'Hola, soy Mike',
     intro: 'Construyo productos digitales con visión de UX y profundidad técnica, acelerados con IA.',

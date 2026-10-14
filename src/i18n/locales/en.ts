@@ -15,6 +15,9 @@ export const en = {
     label: 'Switch language',
   },
   home: {
+    wireTag: '[ Hero · About me ]',
+    wireRole: 'Product Engineer',
+    wireCta: '[ CTA ]',
     tag: 'Product Engineer · UX',
     title: 'Hi, I\'m Mike',
     intro: 'I build digital products with UX vision and technical depth, accelerated with AI.',
