@@ -76,6 +76,21 @@ export const es: Dictionary = {
   },
   contact: {
     title: 'Contacto',
+    intro: 'Cuéntame sobre tu proyecto y respondo en 48 h.',
+    fields: {
+      name: 'Nombre',
+      email: 'Correo',
+      message: 'Mensaje',
+    },
+    errors: {
+      required: 'Este campo es obligatorio.',
+      email: 'Ingresa un correo válido.',
+      tooShort: 'El mensaje debe tener al menos 10 caracteres.',
+    },
+    submit: 'Enviar mensaje',
+    submitting: 'Enviando...',
+    success: 'Mensaje enviado. ¡Gracias!',
+    failure: 'Algo salió mal. Inténtalo de nuevo.',
   },
   notFound: {
     title: 'Página no encontrada',

@@ -74,6 +74,21 @@ export const en = {
   },
   contact: {
     title: 'Contact',
+    intro: 'Tell me about your project and I will reply within 48 h.',
+    fields: {
+      name: 'Name',
+      email: 'Email',
+      message: 'Message',
+    },
+    errors: {
+      required: 'This field is required.',
+      email: 'Enter a valid email address.',
+      tooShort: 'The message must be at least 10 characters.',
+    },
+    submit: 'Send message',
+    submitting: 'Sending...',
+    success: 'Message sent. Thank you!',
+    failure: 'Something went wrong. Please try again.',
   },
   notFound: {
     title: 'Page not found',
