@@ -3,17 +3,18 @@ import { Link } from 'react-router'
 
 type ButtonProps = {
   to: string
-  variant?: 'primary' | 'outline' | 'light'
+  variant?: 'primary' | 'outline' | 'light' | 'fx'
   children: ReactNode
 }
 
 const base =
-  'inline-flex items-center gap-2 rounded-lg px-5 py-3 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2'
+  'inline-flex items-center gap-2 px-5 py-3 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2'
 
 const variants = {
-  primary: 'bg-indigo-600 text-white',
-  outline: 'border border-indigo-600 text-indigo-600',
-  light: 'bg-white text-indigo-600',
+  primary: 'rounded-lg bg-indigo-600 text-white',
+  outline: 'rounded-lg border border-indigo-600 text-indigo-600',
+  light: 'rounded-lg bg-white text-indigo-600',
+  fx: 'fx',
 }
 
 export function Button({ to, variant = 'primary', children }: ButtonProps) {

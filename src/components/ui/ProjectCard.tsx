@@ -7,7 +7,7 @@ export function ProjectCard({ project }: { project: ProjectKey }) {
   const { title, description } = t.projects.items[project]
 
   return (
-    <article className="rounded-xl border border-gray-200 p-4 shadow-sm">
+    <article className="fx p-4">
       <ImagePlaceholder label={t.home.imageAlt} className="mb-3 aspect-[16/10]" />
       <h3 className="font-semibold">{title}</h3>
       <p>{description}</p>

@@ -1,1 +1,79 @@
 @import "tailwindcss";
+
+:root,
+[data-fi='hi'] {
+  --bg: #fff;
+  --bd: #e5e7eb;
+  --bw: 1px;
+  --bs: solid;
+  --c: #1f2937;
+  --ff: ui-sans-serif, system-ui, sans-serif;
+  --r: 14px;
+  --sh: 0 1px 3px rgb(0 0 0 / 0.08);
+  --x: 0;
+  --ph: linear-gradient(135deg, #6366f1, #a5b4fc);
+}
+
+:root {
+  --t: 0;
+}
+
+[data-fi='lo'] {
+  --bg: #f3f4f6;
+  --bd: #9ca3af;
+  --bw: 2px;
+  --bs: dashed;
+  --c: #6b7280;
+  --ff: ui-monospace, 'Courier New', monospace;
+  --r: 2px;
+  --sh: none;
+  --x: 1;
+  --ph: #e5e7eb;
+}
+
+[data-fi='mid'] {
+  --bg: #d9e2e9;
+  --bd: #374151;
+  --bw: 1px;
+  --bs: solid;
+  --c: #1f2937;
+  --ff: ui-sans-serif, system-ui, sans-serif;
+  --r: 2px;
+  --sh: 0 1px 2px rgb(0 0 0 / 0.05);
+  --x: 1;
+  --ph: #c3d0da;
+}
+
+@utility fx-text {
+  color: var(--c);
+  font-family: var(--ff);
+  transition: color 0.7s;
+}
+
+@utility fx {
+  background: var(--bg);
+  border: var(--bw) var(--bs) var(--bd);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+  color: var(--c);
+  font-family: var(--ff);
+  transition:
+    background-color 0.7s,
+    border-color 0.7s,
+    color 0.7s,
+    border-radius 0.7s,
+    box-shadow 0.7s;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+@utility fx-ph {
+  background: var(--ph);
+  border: var(--bw) solid var(--bd);
+  border-radius: var(--r);
+  transition: border-color 0.7s;
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
