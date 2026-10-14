@@ -11,7 +11,7 @@
   --r: 14px;
   --sh: 0 1px 3px rgb(0 0 0 / 0.08);
   --x: 0;
-  --ph: linear-gradient(135deg, #6366f1, #a5b4fc);
+  --ph: linear-gradient(135deg, #3730a3, #4f46e5);
   --act: #e0e7ff;
 }
 
@@ -24,7 +24,7 @@
   --bd: #9ca3af;
   --bw: 2px;
   --bs: dashed;
-  --c: #6b7280;
+  --c: #374151;
   --ff: ui-monospace, 'Courier New', monospace;
   --r: 2px;
   --sh: none;

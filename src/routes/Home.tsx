@@ -31,7 +31,7 @@ export function Home() {
             <ImagePlaceholder label={t.home.imageAlt} className="h-(--H) [--x:calc(1_-_var(--t))]">
               <Icon icon={faUser} className="text-7xl opacity-70" />
             </ImagePlaceholder>
-            <small className="mt-2 block text-center opacity-70">{t.home.imageCaption}</small>
+            <small className="mt-2 block text-center opacity-80">{t.home.imageCaption}</small>
           </Fidelity>
         </aside>
       </div>
