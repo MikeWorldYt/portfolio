@@ -55,10 +55,13 @@ export const en = {
     intro: 'Selected work.',
     readMore: 'Read more',
     items: {
-      one: { title: 'Project one', description: 'Short results-oriented description.' },
-      two: { title: 'Project two', description: 'Short results-oriented description.' },
-      three: { title: 'Project three', description: 'Short results-oriented description.' },
+      yuuka: { title: 'Yuuka Agent', description: 'AI agent in a WhatsApp chat that organizes your agenda, calendar events and tasks, connected to Google APIs and Meta.' },
+      antSystem: { title: 'ANT System', description: 'Organizational method for managing files and folders with consistency, clarity and an automation-friendly structure.' },
+      fileManagement: { title: 'FileManagement', description: 'A reference tool to build your own file management system, using a methodology of levels and naming that makes storing files easier.' },
     },
+    repo: 'Repository',
+    demo: 'Live site',
+    back: 'Back to home',
   },
   social: {
     title: 'Social profiles',

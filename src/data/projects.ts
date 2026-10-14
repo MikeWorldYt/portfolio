@@ -1,3 +1,30 @@
-export const projects = ['one', 'two', 'three'] as const
+export const projects = [
+  {
+    id: 'yuuka',
+    repo: 'https://github.com/MikeWorldYt/ai-personalities',
+    tags: ['AI Agent', 'WhatsApp', 'Google APIs', 'Meta'],
+  },
+  {
+    id: 'antSystem',
+    repo: 'https://github.com/MikeWorldYt/ANT-system',
+    demo: 'https://ant-system.vercel.app',
+    tags: ['Python'],
+  },
+  {
+    id: 'fileManagement',
+    repo: 'https://github.com/MikeWorldYt/FileManagement',
+    demo: 'https://mikeworldyt.github.io/FileManagement/',
+    tags: ['HTML'],
+  },
+] as const
 
-export type ProjectKey = (typeof projects)[number]
+type Project = (typeof projects)[number]
+
+export type ProjectKey = Project['id']
+
+export type ProjectData = {
+  id: ProjectKey
+  repo: string
+  demo?: string
+  tags: readonly string[]
+}

@@ -57,10 +57,13 @@ export const es: Dictionary = {
     intro: 'Trabajo seleccionado.',
     readMore: 'Ver más',
     items: {
-      one: { title: 'Proyecto uno', description: 'Descripción corta orientada a resultados.' },
-      two: { title: 'Proyecto dos', description: 'Descripción corta orientada a resultados.' },
-      three: { title: 'Proyecto tres', description: 'Descripción corta orientada a resultados.' },
+      yuuka: { title: 'Yuuka Agent', description: 'Agente de IA en un chat de WhatsApp que organiza tu agenda, eventos de calendario y tareas, conectado a las APIs de Google y Meta.' },
+      antSystem: { title: 'ANT System', description: 'Método de organización para gestionar archivos y carpetas con consistencia, claridad y una estructura pensada para automatizar.' },
+      fileManagement: { title: 'FileManagement', description: 'Herramienta de referencia para crear tu propio sistema de gestión de archivos, con una metodología de niveles y nomenclatura que facilita guardarlos.' },
     },
+    repo: 'Repositorio',
+    demo: 'Sitio en vivo',
+    back: 'Volver al inicio',
   },
   social: {
     title: 'Redes sociales',
