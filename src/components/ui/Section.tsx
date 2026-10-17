@@ -13,7 +13,7 @@ type SectionProps = {
 export function Section({ id, level, compact, ref, children }: SectionProps) {
   return (
     <section ref={ref} id={id} className={`flex flex-col justify-center ${compact ? 'py-12 md:py-16' : 'min-h-[70vh] py-16 md:py-24'}`}>
-      <Fidelity level={level} className="mx-auto w-full max-w-4xl">
+      <Fidelity level={level} className="w-full">
         {children}
       </Fidelity>
     </section>

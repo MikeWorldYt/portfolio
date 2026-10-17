@@ -17,7 +17,7 @@ export function Home() {
   const level = useHeroProgress(!usePrefersReducedMotion())
 
   return (
-    <>
+    <div className="mx-auto w-full max-w-6xl">
       <div className="md:grid md:grid-cols-[1.1fr_0.9fr] md:gap-12">
         <div>
           <Hero level={level} />
@@ -39,6 +39,6 @@ export function Home() {
       <Projects />
       <Social />
       <ContactCta />
-    </>
+    </div>
   )
 }
