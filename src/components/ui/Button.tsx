@@ -4,11 +4,17 @@ import { Link } from 'react-router'
 type ButtonProps = {
   to: string
   variant?: 'primary' | 'outline' | 'light' | 'fx'
+  size?: 'md' | 'lg'
   children: ReactNode
 }
 
 const base =
-  'inline-flex items-center gap-2 px-5 py-3 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2'
+  'inline-flex items-center gap-2 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2'
+
+const sizes = {
+  md: 'px-5 py-3',
+  lg: 'px-8 py-4 text-lg',
+}
 
 const variants = {
   primary: 'rounded-lg bg-indigo-600 text-white',
@@ -17,8 +23,8 @@ const variants = {
   fx: 'fx',
 }
 
-export function Button({ to, variant = 'primary', children }: ButtonProps) {
-  const className = `${base} ${variants[variant]}`
+export function Button({ to, variant = 'primary', size = 'md', children }: ButtonProps) {
+  const className = `${base} ${sizes[size]} ${variants[variant]}`
 
   if (to.startsWith('#')) {
     return (

@@ -6,7 +6,7 @@ import { Fidelity } from '../ui/Fidelity.tsx'
 import { Icon } from '../ui/Icon.tsx'
 import { ImagePlaceholder } from '../ui/ImagePlaceholder.tsx'
 
-const bar = 'my-2.5 h-3 rounded-sm bg-gray-500'
+const bar = 'my-3 h-4 rounded-sm bg-gray-500'
 
 export function Hero({ level }: { level: 'lo' | 'mid' }) {
   const { t } = useLocale()
@@ -26,26 +26,26 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
         </ImagePlaceholder>
         <div className="grid">
           <div aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 opacity-[calc(1_-_var(--t))]">
-            <span className="mb-2.5 block text-xs">{t.home.wireTag}</span>
-            <div className={`${bar} h-[18px] w-[45%]`} />
-            <div className="text-lg font-bold">{t.home.wireRole}</div>
+            <span className="mb-3 block text-sm">{t.home.wireTag}</span>
+            <div className={`${bar} mb-5 h-14 w-[55%]`} />
+            <div className="text-xl font-bold">{t.home.wireRole}</div>
             <div className={`${bar} w-[95%]`} />
             <div className={`${bar} w-[82%]`} />
             <div className={`${bar} w-[58%]`} />
-            <span className="fx mt-3.5 inline-block px-5 py-3">{t.home.wireCta}</span>
+            <span className="fx mt-6 inline-block px-8 py-4 text-lg">{t.home.wireCta}</span>
           </div>
           <div
             className={`col-start-1 row-start-1 opacity-(--t) ${level === 'lo' ? 'pointer-events-none' : ''}`}
           >
-            <span className="mb-2.5 block text-xs opacity-80">{t.home.tag}</span>
-            <h1 className="mb-2 text-4xl font-bold md:text-5xl">{t.home.title}</h1>
-            <p className="mb-4 max-w-[34ch] text-lg">{t.home.intro}</p>
-            <Button to="#contact" variant="fx">
+            <span className="mb-3 block text-sm opacity-80">{t.home.tag}</span>
+            <h1 className="mb-5 text-5xl leading-[1.05] font-bold md:text-6xl lg:text-7xl">{t.home.title}</h1>
+            <p className="mb-8 text-xl leading-relaxed md:max-w-[50vw] lg:text-2xl">{t.home.intro}</p>
+            <Button to="#contact" variant="fx" size="lg">
               {t.home.cta}
             </Button>
           </div>
         </div>
-        <p className="text-center text-sm opacity-80">↓ {t.home.scroll}</p>
+        <p className="text-sm opacity-80">↓ {t.home.scroll}</p>
       </Fidelity>
     </section>
   )

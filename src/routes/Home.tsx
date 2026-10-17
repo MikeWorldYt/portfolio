@@ -17,7 +17,7 @@ export function Home() {
   const level = useHeroProgress(!usePrefersReducedMotion())
 
   return (
-    <>
+    <div className="mx-auto w-full max-w-6xl">
       <div className="md:grid md:grid-cols-[1.1fr_0.9fr] md:gap-12">
         <div>
           <Hero level={level} />
@@ -31,7 +31,6 @@ export function Home() {
             <ImagePlaceholder label={t.home.imageAlt} className="h-(--H) [--x:calc(1_-_var(--t))]">
               <Icon icon={faUser} className="text-7xl opacity-70" />
             </ImagePlaceholder>
-            <small className="mt-2 block text-center opacity-80">{t.home.imageCaption}</small>
           </Fidelity>
         </aside>
       </div>
@@ -39,6 +38,6 @@ export function Home() {
       <Projects />
       <Social />
       <ContactCta />
-    </>
+    </div>
   )
 }
