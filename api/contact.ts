@@ -1,4 +1,5 @@
 // Vercel function that verifies Turnstile and stores contact messages in Turso.
+/// <reference types="node" />
 import { createClient } from '@libsql/client'
 
 const turnstileUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
