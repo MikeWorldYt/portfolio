@@ -4,6 +4,10 @@ export const es: Dictionary = {
   site: {
     name: 'Portafolio',
   },
+  meta: {
+    title: 'Mike | Product Engineer · UX',
+    description: 'Portafolio de un Product Engineer: productos digitales con visión de UX y profundidad técnica, acelerados con IA.',
+  },
   nav: {
     label: 'Principal',
     items: {
@@ -27,12 +31,11 @@ export const es: Dictionary = {
     wireRole: 'Product Engineer',
     wireCta: '[ CTA ]',
     tag: 'Product Engineer · UX',
-    title: 'Hola, soy Mike',
-    intro: 'Construyo productos digitales con visión de UX y profundidad técnica, acelerados con IA.',
+    title: 'Mike Diaz',
+    intro: 'Creador de productos digitales con enfoque de Experiencia de Usuario y profundidad técnica, acelerados por IA.',
     cta: 'Hablemos',
     scroll: 'Scroll',
     imageAlt: 'Imagen de ejemplo',
-    imageCaption: 'tu imagen aquí',
   },
   skills: {
     title: 'Skills',
@@ -55,7 +58,7 @@ export const es: Dictionary = {
   projects: {
     title: 'Proyectos',
     intro: 'Trabajo seleccionado.',
-    readMore: 'Ver más',
+    readMore: 'Ver todos los proyectos',
     items: {
       yuuka: { title: 'Yuuka Agent', description: 'Agente de IA en un chat de WhatsApp que organiza tu agenda, eventos de calendario y tareas, conectado a las APIs de Google y Meta.' },
       antSystem: { title: 'ANT System', description: 'Método de organización para gestionar archivos y carpetas con consistencia, claridad y una estructura pensada para automatizar.' },

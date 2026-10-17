@@ -35,7 +35,7 @@ export function Layout() {
       <div
         className={`flex min-h-screen flex-col pb-[62px] md:pb-0 md:transition-[padding] md:duration-[550ms] motion-reduce:transition-none ${contentOffset[mode]}`}
       >
-        <main id="main" tabIndex={-1} className="flex-1 px-4 py-8">
+        <main id="main" tabIndex={-1} className="flex-1 px-4 py-8 focus:outline-none">
           <Outlet />
         </main>
         <Footer />
