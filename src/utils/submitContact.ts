@@ -1,6 +1,10 @@
 import type { ContactValues } from './validateContact.ts'
 
-// Placeholder until a provider (Formspree, mailto, etc.) is chosen; swap only this body.
-export async function submitContact(_values: ContactValues): Promise<void> {
-  await new Promise((resolve) => setTimeout(resolve, 800))
+export async function submitContact(values: ContactValues, token: string): Promise<void> {
+  const res = await fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...values, token }),
+  })
+  if (!res.ok) throw new Error(`Contact request failed with ${res.status}`)
 }

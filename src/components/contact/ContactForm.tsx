@@ -5,6 +5,7 @@ import { submitContact } from '../../utils/submitContact.ts'
 import { validateContact } from '../../utils/validateContact.ts'
 import type { ContactErrors, ContactValues } from '../../utils/validateContact.ts'
 import { ContactField } from './ContactField.tsx'
+import { TurnstileWidget } from './TurnstileWidget.tsx'
 
 type Status = 'idle' | 'invalid' | 'submitting' | 'success' | 'failure'
 
@@ -16,6 +17,8 @@ export function ContactForm() {
   const [values, setValues] = useState(emptyValues)
   const [errors, setErrors] = useState<ContactErrors>({})
   const [status, setStatus] = useState<Status>('idle')
+  const [token, setToken] = useState('')
+  const [widgetKey, setWidgetKey] = useState(0)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target
@@ -34,14 +37,22 @@ export function ContactForm() {
       return
     }
 
+    if (!token) {
+      setStatus('failure')
+      return
+    }
+
     setStatus('submitting')
     try {
-      await submitContact(values)
+      await submitContact(values, token)
       setValues(emptyValues)
       setStatus('success')
     } catch (error) {
       console.error('Contact submit failed', error)
       setStatus('failure')
+    } finally {
+      setToken('')
+      setWidgetKey((key) => key + 1)
     }
   }
 
@@ -77,6 +88,7 @@ export function ContactForm() {
         multiline
         onChange={handleChange}
       />
+      <TurnstileWidget key={widgetKey} onToken={setToken} />
       <div>
         <button
           type="submit"
