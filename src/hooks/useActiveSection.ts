@@ -4,6 +4,8 @@ import type { FidelityLevel } from '../components/ui/Fidelity.tsx'
 type ActiveSection = { active: string | null; level: FidelityLevel }
 
 const fallback: ActiveSection = { active: null, level: 'hi' }
+const topBarHeight = 56
+const tabBarHeight = 62
 
 function toLevel(value: string | undefined): FidelityLevel {
   return value === 'lo' || value === 'mid' ? value : 'hi'
@@ -25,8 +27,17 @@ export function useActiveSection(ids: readonly string[], enabled: boolean) {
         const element = document.getElementById(id)
         if (element && element.getBoundingClientRect().top + window.scrollY <= probe) current = id
       }
-      const fidelity = document.querySelector<HTMLElement>(`#${current} > [data-fi]`)
+
+      const desktop = window.matchMedia('(min-width: 768px)').matches
+      const barY = desktop ? topBarHeight / 2 : window.innerHeight - tabBarHeight / 2
+      let underBar = ids[0]
+      for (const id of ids) {
+        const rect = document.getElementById(id)?.getBoundingClientRect()
+        if (rect && rect.top <= barY && rect.bottom >= barY) underBar = id
+      }
+      const fidelity = document.querySelector<HTMLElement>(`#${underBar} > [data-fi]`)
       const level = toLevel(fidelity?.dataset.fi)
+
       setState((prev) => (prev.active === current && prev.level === level ? prev : { active: current, level }))
     }
 

@@ -10,6 +10,7 @@ export type NavMode = 'side' | 'top'
 type NavigationProps = {
   mode: NavMode
   level: FidelityLevel
+  theme?: 'dark'
   active: string | null
 }
 
@@ -38,7 +39,7 @@ const language = {
   top: 'md:ml-3',
 }
 
-export function Navigation({ mode, level, active }: NavigationProps) {
+export function Navigation({ mode, level, theme, active }: NavigationProps) {
   const { t } = useLocale()
   const { pathname } = useLocation()
   const onHome = pathname === '/'
@@ -54,6 +55,7 @@ export function Navigation({ mode, level, active }: NavigationProps) {
       <LocaleSwitch className="fixed top-2 right-2 z-10 md:hidden" />
       <nav
         data-fi={level}
+        data-theme={theme}
         aria-label={t.nav.label}
         className={`fx-nav fixed inset-x-0 bottom-0 z-10 fx-edge-t pb-[env(safe-area-inset-bottom)] md:inset-x-auto md:top-0 md:bottom-auto md:left-0 md:overflow-hidden md:pb-0 ${shape[mode]}`}
       >
