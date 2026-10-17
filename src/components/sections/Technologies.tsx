@@ -16,12 +16,12 @@ export function Technologies() {
       <h2 className="mb-2 text-3xl font-bold">{t.technologies.title}</h2>
       <p className="mb-4">{t.technologies.intro}</p>
       <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-        {technologies.map(({ id, label, abbr }, index) => (
+        {technologies.map(({ id, label, icon }, index) => (
           <li key={id}>
             <Reveal delay={index * 90}>
               <div className="fx p-3 text-center text-sm">
-                <ImagePlaceholder label={label} className="mb-2 aspect-square font-bold text-white">
-                  {abbr}
+                <ImagePlaceholder label={label} className="mb-2 aspect-square">
+                  <img src={icon} alt="" className="size-12 object-contain sm:size-14" />
                 </ImagePlaceholder>
                 {label}
               </div>
