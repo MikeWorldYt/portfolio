@@ -11,7 +11,7 @@ export function Technologies() {
   const reduceMotion = usePrefersReducedMotion()
 
   return (
-    <Section id="technologies" level={seen || reduceMotion ? 'hi' : 'mid'} ref={ref}>
+    <Section id="technologies" compact level={seen || reduceMotion ? 'hi' : 'mid'} ref={ref}>
       <h2 className="mb-2 text-3xl font-bold">{t.technologies.title}</h2>
       <p className="mb-4">{t.technologies.intro}</p>
       <ul className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
