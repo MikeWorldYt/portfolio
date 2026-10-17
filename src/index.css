@@ -13,6 +13,10 @@
   --x: 0;
   --ph: linear-gradient(135deg, #eef2ff, #c7d2fe);
   --act: #e0e7ff;
+  --surface: transparent;
+  --surface-bd: transparent;
+  --chip: transparent;
+  --glow: 0;
 }
 
 :root {
@@ -45,6 +49,18 @@
   --x: 1;
   --ph: #c3d0da;
   --act: #b4c3cf;
+}
+
+[data-fi='hi'][data-theme='dark'] {
+  --surface: #171b23;
+  --surface-bd: rgb(255 255 255 / 0.08);
+  --bg: #1f2530;
+  --bd: rgb(255 255 255 / 0.12);
+  --c: #e6e9ef;
+  --r: 16px;
+  --sh: 0 8px 24px rgb(0 0 0 / 0.35);
+  --chip: #eef1f6;
+  --glow: 1;
 }
 
 @utility fx-text {

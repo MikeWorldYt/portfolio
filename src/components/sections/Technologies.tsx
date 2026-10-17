@@ -11,25 +11,35 @@ export function Technologies() {
   const reduceMotion = usePrefersReducedMotion()
 
   return (
-    <Section id="technologies" compact level={seen || reduceMotion ? 'hi' : 'mid'} ref={ref}>
-      <h2 className="mb-2 text-3xl font-bold">{t.technologies.title}</h2>
-      <p className="mb-4">{t.technologies.intro}</p>
-      <ul className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
-        {technologies.map(({ id, label, icon }, index) => (
-          <li key={id}>
-            <Reveal delay={index * 90}>
-              <div className="flex flex-col items-center gap-2 text-center text-sm">
-                <img
-                  src={icon}
-                  alt=""
-                  className="size-12 object-contain transition-[filter,opacity] duration-700 in-data-[fi=mid]:opacity-60 in-data-[fi=mid]:grayscale motion-reduce:transition-none sm:size-14"
-                />
-                {label}
-              </div>
-            </Reveal>
-          </li>
-        ))}
-      </ul>
+    <Section id="technologies" compact theme="dark" level={seen || reduceMotion ? 'hi' : 'mid'} ref={ref}>
+      <div className="relative overflow-hidden rounded-3xl border border-(color:--surface-bd) bg-(--surface) p-8 transition-[background-color,border-color] duration-700 motion-reduce:transition-none md:p-12">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-32 left-1/2 size-[28rem] -translate-x-1/2 rounded-full bg-indigo-500/25 opacity-(--glow) blur-3xl transition-opacity duration-700 motion-reduce:transition-none"
+        />
+        <div className="relative">
+          <h2 className="mb-2 text-3xl font-bold tracking-tight">{t.technologies.title}</h2>
+          <p className="mb-8 opacity-80">{t.technologies.intro}</p>
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+            {technologies.map(({ id, label, icon }, index) => (
+              <li key={id}>
+                <Reveal delay={index * 45}>
+                  <div className="group flex flex-col items-center gap-3 text-center text-sm">
+                    <span className="grid size-16 place-items-center rounded-2xl bg-(--chip) transition-[background-color,transform] duration-700 group-hover:-translate-y-1 motion-reduce:transition-none sm:size-[4.5rem]">
+                      <img
+                        src={icon}
+                        alt=""
+                        className="size-9 object-contain transition-[filter,opacity] duration-700 in-data-[fi=mid]:opacity-60 in-data-[fi=mid]:grayscale motion-reduce:transition-none sm:size-10"
+                      />
+                    </span>
+                    <span className="opacity-90">{label}</span>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </Section>
   )
 }
