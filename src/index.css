@@ -16,7 +16,9 @@
   --surface: transparent;
   --surface-bd: transparent;
   --chip: transparent;
-  --glow: 0;
+  --chip-bd: transparent;
+  --chip-sh: none;
+  --water: #171b23;
 }
 
 :root {
@@ -59,8 +61,30 @@
   --c: #e6e9ef;
   --r: 16px;
   --sh: 0 8px 24px rgb(0 0 0 / 0.35);
-  --chip: #eef1f6;
-  --glow: 1;
+  --ph: linear-gradient(135deg, #2b3350, #1f2530);
+  --act: rgb(255 255 255 / 0.12);
+  --chip: rgb(255 255 255 / 0.78);
+  --chip-bd: rgb(255 255 255 / 0.55);
+  --chip-sh:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    inset 0 -1px 0 rgb(0 0 0 / 0.08),
+    0 10px 30px rgb(0 0 0 / 0.35);
+}
+
+[data-fi='lo'][data-theme='dark'] {
+  --bg: #1b2029;
+  --bd: #6b7280;
+  --c: #cbd5e1;
+  --ph: #2a3140;
+  --act: rgb(255 255 255 / 0.1);
+}
+
+[data-fi='mid'][data-theme='dark'] {
+  --bg: #232a36;
+  --bd: #94a3b8;
+  --c: #e6e9ef;
+  --ph: #2f3848;
+  --act: rgb(255 255 255 / 0.12);
 }
 
 @utility fx-text {

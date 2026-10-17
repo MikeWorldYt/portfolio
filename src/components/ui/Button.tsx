@@ -18,7 +18,8 @@ const sizes = {
 
 const variants = {
   primary: 'rounded-lg bg-indigo-600 text-white',
-  outline: 'rounded-lg border border-indigo-600 text-indigo-600',
+  outline:
+    'rounded-lg border border-indigo-600 text-indigo-600 in-data-[theme=dark]:border-indigo-300 in-data-[theme=dark]:text-indigo-300',
   light: 'rounded-lg bg-white text-indigo-600',
   fx: 'fx',
 }
