@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./styles/liquid-glass.css";
+@import "./styles/wireframe-editor.css";
 
 @theme {
   --animate-flick: flick 1.2s ease-in-out 3;

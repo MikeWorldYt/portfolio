@@ -5,6 +5,7 @@ import { Button } from '../ui/Button.tsx'
 import { Fidelity } from '../ui/Fidelity.tsx'
 import { Icon } from '../ui/Icon.tsx'
 import { ImagePlaceholder } from '../ui/ImagePlaceholder.tsx'
+import { entranceOffset } from '../ui/WireframeIntro.tsx'
 
 const bar = 'my-3 h-4 rounded-sm bg-gray-500'
 
@@ -18,21 +19,33 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
         level={level}
         className={`flex flex-col justify-center gap-5 ${reduceMotion ? '' : 'sticky top-0 h-[calc(100vh-62px)] md:top-14 md:h-[calc(100vh-3.5rem)]'}`}
       >
-        <ImagePlaceholder
-          label={t.home.imageAlt}
-          className="h-[min(26vh,200px)] [--x:calc(1_-_var(--t))] md:hidden"
-        >
-          <Icon icon={faUser} className="text-5xl" />
-        </ImagePlaceholder>
+        <div data-fg-step="1" className="fg-item md:hidden" style={entranceOffset(40, 30)}>
+          <ImagePlaceholder label={t.home.imageAlt} className="h-[min(26vh,200px)] [--x:calc(1_-_var(--t))]">
+            <Icon icon={faUser} className="text-5xl" />
+          </ImagePlaceholder>
+        </div>
         <div className="grid">
-          <div aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 opacity-[calc(1_-_var(--t))]">
-            <span className="mb-3 block text-sm">{t.home.wireTag}</span>
-            <div className={`${bar} mb-5 h-14 w-[55%]`} />
-            <div className="text-xl font-bold">{t.home.wireRole}</div>
-            <div className={`${bar} w-[95%]`} />
-            <div className={`${bar} w-[82%]`} />
-            <div className={`${bar} w-[58%]`} />
-            <span className="fx mt-6 inline-block px-8 py-4 text-lg">{t.home.wireCta}</span>
+          <div
+            aria-hidden="true"
+            className={`col-start-1 row-start-1 opacity-[calc(1_-_var(--t))] ${level === 'lo' ? '' : 'pointer-events-none'}`}
+          >
+            <span data-fg-step="2" className="fg-text mb-3 block w-fit text-sm" style={entranceOffset(-30, -10)}>
+              {t.home.wireTag}
+            </span>
+            <div data-fg-step="3" className={`${bar} fg-item mb-5 h-14 w-[55%]`} style={entranceOffset(-50, 20)} />
+            <div data-fg-step="4" className="fg-text w-fit text-xl font-bold" style={entranceOffset(20, -20)}>
+              {t.home.wireRole}
+            </div>
+            <div data-fg-step="5" className={`${bar} fg-item w-[95%]`} style={entranceOffset(-40, 0)} />
+            <div data-fg-step="6" className={`${bar} fg-item w-[82%]`} style={entranceOffset(30, 10)} />
+            <div data-fg-step="7" className={`${bar} fg-item w-[58%]`} style={entranceOffset(-20, 20)} />
+            <span
+              data-fg-step="8"
+              className="fx fg-item mt-6 inline-block px-8 py-4 text-lg"
+              style={entranceOffset(30, 30)}
+            >
+              {t.home.wireCta}
+            </span>
           </div>
           <div
             className={`col-start-1 row-start-1 opacity-(--t) ${level === 'lo' ? 'pointer-events-none' : ''}`}

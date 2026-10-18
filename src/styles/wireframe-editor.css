@@ -1,0 +1,30 @@
+/* Lo-fi hero dressed as a design tool: Figma-blue hover, elements dropping into place one by one. */
+@layer components {
+  [data-fg-step] {
+    transition:
+      opacity 0.3s ease,
+      translate 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [data-fg-step]:not([data-fg='in']) {
+    opacity: 0;
+    translate: var(--fg-dx, 0) var(--fg-dy, 0);
+  }
+
+  [data-fi='lo'] .fg-item:hover {
+    outline: 1px solid #0c8ce9;
+    outline-offset: 2px;
+  }
+
+  [data-fi='lo'] .fg-text:hover,
+  nav[data-fi='lo'] a:hover span {
+    text-decoration: underline 1px #0c8ce9;
+    text-underline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-fg-step] {
+      transition: none;
+    }
+  }
+}
