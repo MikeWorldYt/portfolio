@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion.ts'
 
 const triggerRatio = 0.6
-const themeDelayMs = 500
+const themeDelayMs = 1000
 
 export function useWaterTheme(sectionId: string) {
   const [rising, setRising] = useState(false)
