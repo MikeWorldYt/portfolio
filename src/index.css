@@ -170,3 +170,9 @@
 @utility fx-edge-b {
   border-width: 0 0 var(--bw) 0;
 }
+
+/* Keeps section headings readable over the floating background shapes. */
+[data-theme='dark'] h2  {
+  /* color: #1249b8; */
+  filter: drop-shadow(3px 2px 3px #c3c3c38d);
+}
