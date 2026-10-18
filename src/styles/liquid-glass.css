@@ -1,0 +1,248 @@
+/* Liquid glass icon tiles for the Technologies section; every class is namespaced lg-. */
+@layer components {
+  .lg-tile {
+    --lg-size: 5rem;
+    --lg-radius: 28%;
+    --lg-blur: 14px;
+    --lg-sat: 1.8;
+    --lg-tint: linear-gradient(145deg, rgb(255 255 255 / 0.42), rgb(255 255 255 / 0.18));
+    --lg-rim: rgb(255 255 255 / 0.5);
+    --lg-rim-top: rgb(255 255 255 / 0.55);
+    --lg-rim-bottom: rgb(255 255 255 / 0.2);
+    --lg-shine: rgb(255 255 255 / 0.6);
+    --lg-shadow: 0 10px 20px rgb(30 41 90 / 0.12);
+    --lg-shadow-hover: 0 16px 28px rgb(30 41 90 / 0.16);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+  }
+
+  [data-theme='dark'] .lg-tile {
+    --lg-tint: linear-gradient(145deg, rgb(255 255 255 / 0.3), rgb(255 255 255 / 0.12));
+    --lg-rim: rgb(255 255 255 / 0.35);
+    --lg-rim-top: rgb(255 255 255 / 0.4);
+    --lg-rim-bottom: rgb(255 255 255 / 0.12);
+    --lg-shine: rgb(255 255 255 / 0.4);
+    --lg-shadow: 0 10px 22px rgb(0 0 0 / 0.3);
+    --lg-shadow-hover: 0 16px 30px rgb(0 0 0 / 0.38);
+  }
+
+  /* Colourful shapes on the fixed dark layer: frosted glass only reads when something sits behind it. */
+  .lg-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .lg-shape {
+    position: absolute;
+    display: block;
+  }
+
+  .lg-shape--green {
+    animation: lg-swim-a 38s ease-in-out infinite;
+    left: 4%;
+    top: 4%;
+    width: 160px;
+    height: 64px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 30% 30%, #8cf5a0, #22c55e 70%);
+    box-shadow: inset 0 3px 8px rgb(255 255 255 / 0.7);
+  }
+
+  .lg-shape--orange {
+    animation: lg-swim-b 46s ease-in-out infinite;
+    right: 5%;
+    top: 26%;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 28%, #ffd27a, #ff8a00 70%);
+    box-shadow: inset 0 4px 12px rgb(255 255 255 / 0.7);
+  }
+
+  .lg-shape--bar {
+    animation: lg-swim-c 52s ease-in-out infinite;
+    left: 40%;
+    top: 46%;
+    width: 19%;
+    height: 22px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #6366f1, #d946ef, #ff5f6d);
+  }
+
+  .lg-shape--blue {
+    animation: lg-swim-a 44s ease-in-out infinite reverse;
+    left: 8%;
+    bottom: 10%;
+    width: 170px;
+    height: 40px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #38bdf8, #2563eb);
+  }
+
+  .lg-shape--cyan {
+    animation: lg-swim-b 34s ease-in-out infinite;
+    left: 58%;
+    bottom: 4%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 28%, #a5f3fc, #06b6d4 70%);
+  }
+
+  @keyframes lg-swim-a {
+    50% {
+      transform: translate(40px, -24px) rotate(4deg);
+    }
+  }
+
+  @keyframes lg-swim-b {
+    50% {
+      transform: translate(-32px, 22px) rotate(-3deg);
+    }
+  }
+
+  @keyframes lg-swim-c {
+    50% {
+      transform: translate(26px, 30px);
+    }
+  }
+
+  .lg-star {
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+    opacity: var(--o);
+    animation: lg-twinkle ease-in-out infinite;
+  }
+
+  @keyframes lg-twinkle {
+    50% {
+      opacity: calc(var(--o) * 0.35);
+    }
+  }
+
+  .lg-label {
+    text-align: center;
+  }
+
+  .lg-wrap {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  .lg-glass {
+    --pull-x: 0px;
+    --pull-y: 0px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: var(--lg-size);
+    height: var(--lg-size);
+    border-radius: var(--lg-radius);
+    background: var(--lg-tint);
+    -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-sat));
+    backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-sat));
+    box-shadow:
+      inset 0 0 0 1px var(--lg-rim),
+      inset 1px 2px 4px -1px var(--lg-rim-top),
+      inset -1px -3px 6px -3px var(--lg-rim-bottom),
+      var(--lg-shadow);
+    transform: translate(var(--pull-x), var(--pull-y));
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      border-radius 0.35s,
+      box-shadow 0.35s;
+  }
+
+  /* Refraction alone reads as a magnifier; chaining blur keeps the frosted look. */
+  .lg-refract .lg-glass {
+    -webkit-backdrop-filter: url(#liquid-glass) blur(var(--lg-blur)) saturate(var(--lg-sat));
+    backdrop-filter: url(#liquid-glass) blur(var(--lg-blur)) saturate(var(--lg-sat));
+  }
+
+  .lg-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 90% at var(--lg-light-x, 28%) var(--lg-light-y, 12%), var(--lg-shine), transparent 45%),
+      linear-gradient(315deg, rgb(255 255 255 / 0.3), transparent 35%);
+  }
+
+  .lg-tile:hover .lg-glass {
+    border-radius: 50%;
+    transform: translate(var(--pull-x), calc(var(--pull-y) - 6px)) scale(1.06);
+    box-shadow:
+      inset 0 0 0 1px var(--lg-rim),
+      inset 1px 2px 4px -1px var(--lg-rim-top),
+      inset -1px -3px 6px -3px var(--lg-rim-bottom),
+      var(--lg-shadow-hover);
+  }
+
+  /* Droplet that follows the pointer a few px after it leaves a tile, then springs back. */
+  .lg-drop {
+    --dx: 0px;
+    --dy: 0px;
+    --ds: 0.4;
+    --do: 0;
+    position: absolute;
+    width: calc(var(--lg-size) * 0.42);
+    height: calc(var(--lg-size) * 0.42);
+    border-radius: 50%;
+    background: var(--lg-tint);
+    -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-sat));
+    backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-sat));
+    box-shadow:
+      inset 0 0 0 1px var(--lg-rim),
+      inset 1px 2px 4px -1px var(--lg-rim-top);
+    opacity: var(--do);
+    transform: translate(var(--dx), var(--dy)) scale(var(--ds));
+    pointer-events: none;
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.4s;
+  }
+
+  .lg-drop.is-following {
+    transition: none;
+  }
+
+  .lg-icon {
+    position: relative;
+    z-index: 1;
+    width: 52%;
+    height: 52%;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgb(0 0 0 / 0.22));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lg-shape,
+    .lg-star {
+      animation: none;
+    }
+    .lg-drop {
+      display: none;
+    }
+    .lg-glass {
+      transition: none;
+    }
+    .lg-tile:hover .lg-glass {
+      transform: none;
+    }
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .lg-glass {
+      background: rgb(255 255 255 / 0.55);
+    }
+  }
+}
