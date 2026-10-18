@@ -6,6 +6,7 @@ import { useScrolledPastHero } from '../../hooks/useScrolledPastHero.ts'
 import { useWaterTheme } from '../../hooks/useWaterTheme.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
 import { ThemeContext } from '../ui/themeContext.ts'
+import { FloatingShapes } from '../ui/FloatingShapes.tsx'
 import { LiquidGlassFilter } from '../ui/LiquidGlass.tsx'
 import { StarField } from '../ui/StarField.tsx'
 import { Footer } from './Footer.tsx'
@@ -39,13 +40,7 @@ export function Layout() {
         <span className="absolute top-1/3 -right-32 size-[28rem] rounded-full bg-violet-500/20 blur-3xl" />
         <span className="absolute -bottom-32 left-1/3 size-96 rounded-full bg-cyan-500/20 blur-3xl" />
         <StarField />
-        <div className="lg-shapes">
-          <span className="lg-shape lg-shape--green" />
-          <span className="lg-shape lg-shape--orange" />
-          <span className="lg-shape lg-shape--bar" />
-          <span className="lg-shape lg-shape--blue" />
-          <span className="lg-shape lg-shape--cyan" />
-        </div>
+        <FloatingShapes active={rising} />
       </div>
       <a
         href="#main"
