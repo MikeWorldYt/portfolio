@@ -19,7 +19,7 @@ export function useHeroProgress(enabled: boolean) {
       const height = window.innerHeight
       const t = Math.min(1, Math.max(0, (window.scrollY - height * startRatio) / (height * spanRatio)))
       root.style.setProperty('--t', String(t))
-      setLevel(t >= 0.5 ? 'mid' : 'lo')
+      setLevel(window.scrollY > height * startRatio ? 'mid' : 'lo')
     }
     update()
     window.addEventListener('scroll', update, { passive: true })

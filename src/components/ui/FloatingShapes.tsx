@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion.ts'
+import { claimPointer, contentSelector } from '../../utils/pointerClaim.ts'
 import { createBody, hitTest, push, step } from '../../utils/spacePhysics.ts'
 import type { Body } from '../../utils/spacePhysics.ts'
 
@@ -10,9 +11,6 @@ const shapes = [
   { id: 'blue', width: 170, height: 40, x: 0.16, y: 0.86 },
   { id: 'cyan', width: 80, height: 80, x: 0.62, y: 0.9 },
 ]
-
-// Content in front of a shape keeps its own click; only bare background reaches the shapes.
-const blocking = 'a, button, input, textarea, select, label, nav, footer, h1, h2, h3, h4, p, img, svg, [role="img"], .fx, .lg-tile'
 
 function render(element: HTMLSpanElement | null, body: Body, width: number, height: number) {
   if (!element) return
@@ -47,12 +45,14 @@ export function FloatingShapes({ active }: { active: boolean }) {
 
     const shapeAt = (event: PointerEvent) => {
       const target = event.target as Element | null
-      if (target?.closest(blocking)) return undefined
+      if (target?.closest(contentSelector)) return undefined
       return bodiesRef.current.find((body) => hitTest(body, event.clientX, event.clientY))
     }
     const onDown = (event: PointerEvent) => {
       const body = shapeAt(event)
-      if (body) push(body, event.clientX, event.clientY)
+      if (!body) return
+      push(body, event.clientX, event.clientY)
+      claimPointer()
     }
     const onMove = (event: PointerEvent) => {
       document.body.style.cursor = shapeAt(event) ? 'pointer' : ''

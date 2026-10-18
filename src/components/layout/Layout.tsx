@@ -2,7 +2,9 @@ import { Outlet, useLocation } from 'react-router'
 import { sections } from '../../data/sections.ts'
 import { useActiveSection } from '../../hooks/useActiveSection.ts'
 import { useHashScroll } from '../../hooks/useHashScroll.ts'
+import { useScrollDebug } from '../../hooks/useScrollDebug.ts'
 import { useScrolledPastHero } from '../../hooks/useScrolledPastHero.ts'
+import { useStepScroll } from '../../hooks/useStepScroll.ts'
 import { useWaterTheme } from '../../hooks/useWaterTheme.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
 import { ThemeContext } from '../ui/themeContext.ts'
@@ -11,6 +13,7 @@ import { LiquidGlassFilter } from '../ui/LiquidGlass.tsx'
 import { StarField } from '../ui/StarField.tsx'
 import { Footer } from './Footer.tsx'
 import { Navigation } from './Navigation.tsx'
+import { StepNav } from './StepNav.tsx'
 import type { NavMode } from './Navigation.tsx'
 
 const sectionIds = sections.map(({ id }) => id)
@@ -27,6 +30,8 @@ export function Layout() {
   const { active, level } = useActiveSection(sectionIds, onHome)
   const { rising, theme } = useWaterTheme('technologies')
   useHashScroll()
+  useStepScroll(onHome)
+  useScrollDebug()
   const mode: NavMode = onHome && !pastHero ? 'side' : 'top'
 
   return (
@@ -49,6 +54,7 @@ export function Layout() {
         {t.nav.skipToContent}
       </a>
       <Navigation mode={mode} level={level} theme={theme} active={active} />
+      {onHome && <StepNav ids={sectionIds} />}
       <div
         className={`flex min-h-screen flex-col pb-[62px] md:pb-0 md:transition-[padding] md:duration-[550ms] motion-reduce:transition-none ${contentOffset[mode]}`}
       >

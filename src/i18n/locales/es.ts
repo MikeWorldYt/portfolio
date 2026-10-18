@@ -20,6 +20,11 @@ export const es: Dictionary = {
     },
     skipToContent: 'Saltar al contenido',
   },
+  stepNav: {
+    label: 'Navegación por pasos',
+    prev: '_prev',
+    next: '_next',
+  },
   footer: {
     rights: 'Todos los derechos reservados',
   },

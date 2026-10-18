@@ -18,6 +18,11 @@ export const en = {
     },
     skipToContent: 'Skip to content',
   },
+  stepNav: {
+    label: 'Step navigation',
+    prev: '_prev',
+    next: '_next',
+  },
   footer: {
     rights: 'All rights reserved',
   },

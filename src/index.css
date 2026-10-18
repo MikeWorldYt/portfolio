@@ -1,6 +1,20 @@
 @import "tailwindcss";
 @import "./styles/liquid-glass.css";
 
+@theme {
+  --animate-nudge: nudge 1.2s ease-in-out 3;
+
+  @keyframes nudge {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(8px);
+    }
+  }
+}
+
 :root,
 [data-fi='hi'] {
   --bg: #fff;
