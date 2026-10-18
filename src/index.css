@@ -1,6 +1,29 @@
 @import "tailwindcss";
 @import "./styles/liquid-glass.css";
 
+@theme {
+  --animate-flick: flick 1.2s ease-in-out 3;
+  --animate-wave: wave 1.2s ease-out 3;
+
+  @keyframes flick {
+    30%,
+    70% {
+      background-color: var(--color-red-500);
+    }
+  }
+
+  @keyframes wave {
+    from {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale(2.2);
+      opacity: 0;
+    }
+  }
+}
+
 :root,
 [data-fi='hi'] {
   --bg: #fff;
