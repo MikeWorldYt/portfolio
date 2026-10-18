@@ -150,10 +150,10 @@
     }
   }
 
-  /* Refraction alone reads as a magnifier; chaining blur keeps the frosted look. */
+  /* Chromium: the lens magnifies and bends the backdrop; only a light frost so the refraction stays visible. */
   .lg-refract .lg-glass {
-    -webkit-backdrop-filter: url(#liquid-glass) blur(var(--lg-blur)) saturate(var(--lg-sat));
-    backdrop-filter: url(#liquid-glass) blur(var(--lg-blur)) saturate(var(--lg-sat));
+    -webkit-backdrop-filter: url(#liquid-glass) blur(2px) saturate(var(--lg-sat));
+    backdrop-filter: url(#liquid-glass) blur(2px) saturate(var(--lg-sat));
   }
 
   .lg-glass::before {
