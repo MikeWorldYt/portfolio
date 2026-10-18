@@ -2,15 +2,24 @@
 @import "./styles/liquid-glass.css";
 
 @theme {
-  --animate-nudge: nudge 1.2s ease-in-out 3;
+  --animate-flick: flick 1.2s ease-in-out 3;
+  --animate-wave: wave 1.2s ease-out 3;
 
-  @keyframes nudge {
-    0%,
-    100% {
-      transform: translateY(0);
+  @keyframes flick {
+    30%,
+    70% {
+      background-color: var(--color-red-500);
     }
-    50% {
-      transform: translateY(8px);
+  }
+
+  @keyframes wave {
+    from {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    to {
+      transform: scale(2.2);
+      opacity: 0;
     }
   }
 }

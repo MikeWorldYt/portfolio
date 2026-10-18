@@ -73,7 +73,7 @@ export function StepNav({ ids }: { ids: readonly string[] }) {
 
   if (!ready) return null
 
-  const nudge = attention ? 'animate-nudge motion-reduce:animate-none' : ''
+  const flick = attention ? 'animate-flick motion-reduce:animate-none' : ''
 
   return (
     <nav
@@ -93,7 +93,7 @@ export function StepNav({ ids }: { ids: readonly string[] }) {
         <span className={`${blob} top-0 right-0 h-full w-1`} />
         <span className={`${blob} ${motion} top-1/2 right-0 h-28 w-5 -translate-y-1/2 rounded-l-full ${open ? 'scale-x-60' : ''}`} />
         <span className={`${blob} ${motion} ${circle} top-[calc(50%-4.25rem)] ${open ? '' : hiddenCircle}`} />
-        <span className={`${blob} ${motion} ${circle} top-[calc(50%+0.75rem)] delay-75 ${nudge} ${open ? '' : hiddenCircle}`} />
+        <span className={`${blob} ${motion} ${circle} top-[calc(50%+0.75rem)] delay-75 ${flick} ${open ? '' : hiddenCircle}`} />
       </div>
 
       <button
@@ -122,8 +122,14 @@ export function StepNav({ ids }: { ids: readonly string[] }) {
         tabIndex={open ? 0 : -1}
         onClick={() => go(nextStop(ids))}
         onAnimationEnd={() => setAttention(false)}
-        className={`${button} top-[calc(50%+0.75rem)] ${nudge} ${open ? 'pointer-events-auto opacity-100' : 'opacity-0'}`}
+        className={`${button} top-[calc(50%+0.75rem)] ${open ? 'pointer-events-auto opacity-100' : 'opacity-0'}`}
       >
+        {attention && (
+          <>
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 animate-wave rounded-full border-2 border-red-500 motion-reduce:hidden" />
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 animate-wave rounded-full border-2 border-red-500 [animation-delay:0.4s] motion-reduce:hidden" />
+          </>
+        )}
         <Icon icon={faChevronDown} />
       </button>
     </nav>
