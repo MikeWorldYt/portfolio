@@ -70,7 +70,7 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
                   aria-current={active === id ? 'true' : undefined}
                   className="flex h-[62px] flex-col items-center justify-center gap-0.5 text-[10.5px] opacity-80 focus-visible:outline-2 focus-visible:-outline-offset-2 aria-[current=true]:bg-(--act) aria-[current=true]:font-bold aria-[current=true]:opacity-100 md:h-[38px] md:flex-row md:justify-start md:gap-2.5 md:px-3 md:text-sm md:rounded-(--r)"
                 >
-                  <Icon icon={icon} className="text-xl md:text-base" />
+                  <Icon icon={icon} className="text-xl in-data-[fi=lo]:[--fa-display:none] md:text-base" />
                   <span>{t.nav.items[id]}</span>
                 </Link>
               </li>
