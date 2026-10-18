@@ -14,7 +14,7 @@ const motion = 'transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0
 const circle = 'right-6 size-14 rounded-full'
 const hiddenCircle = 'translate-x-12 scale-25'
 const button =
-  'absolute right-6 grid size-14 place-items-center rounded-full text-xl text-white transition-opacity duration-200 in-data-[theme=dark]:text-zinc-900 disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2'
+  'absolute right-6 grid size-14 place-items-center rounded-full text-xl text-white transition-opacity duration-200 in-data-[theme=dark]:text-white disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-offset-2'
 
 // Edge tab with _prev/_next drops, shown once the hero leaves lo-fi: hover or tap the tab to pull the drops out;
 // after 30 s unused, or when another component is used, they merge back into the tab (gooey SVG filter).
@@ -73,6 +73,9 @@ export function StepNav({ ids }: { ids: readonly string[] }) {
 
   if (!ready) return null
 
+  // Hi-fi (dark page) swaps the solid goo drops for liquid glass; a filtered parent would break backdrop blur.
+  const glass = theme === 'dark'
+  const drop = glass ? 'absolute lg-chip' : blob
   const flick = attention ? 'animate-flick motion-reduce:animate-none' : ''
 
   return (
@@ -89,11 +92,11 @@ export function StepNav({ ids }: { ids: readonly string[] }) {
         </filter>
       </svg>
 
-      <div aria-hidden="true" className="absolute inset-0 [filter:url(#step-goo)]">
-        <span className={`${blob} top-0 right-0 h-full w-1`} />
-        <span className={`${blob} ${motion} top-1/2 right-0 h-28 w-5 -translate-y-1/2 rounded-l-full ${open ? 'scale-x-60' : ''}`} />
-        <span className={`${blob} ${motion} ${circle} top-[calc(50%-4.25rem)] ${open ? '' : hiddenCircle}`} />
-        <span className={`${blob} ${motion} ${circle} top-[calc(50%+0.75rem)] delay-75 ${flick} ${open ? '' : hiddenCircle}`} />
+      <div aria-hidden="true" className={`absolute inset-0 ${glass ? '' : '[filter:url(#step-goo)]'}`}>
+        {!glass && <span className={`${blob} top-0 right-0 h-full w-1`} />}
+        <span className={`${drop} ${motion} top-1/2 right-0 h-28 w-5 -translate-y-1/2 rounded-l-full ${open ? 'scale-x-60' : ''}`} />
+        <span className={`${drop} ${motion} ${circle} top-[calc(50%-4.25rem)] ${open ? '' : hiddenCircle}`} />
+        <span className={`${drop} ${motion} ${circle} top-[calc(50%+0.75rem)] delay-75 ${flick} ${open ? '' : hiddenCircle}`} />
       </div>
 
       <button
