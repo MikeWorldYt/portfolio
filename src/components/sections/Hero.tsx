@@ -16,7 +16,7 @@ export function Hero({ level, progress }: { level: 'lo' | 'mid'; progress: numbe
   const reduceMotion = usePrefersReducedMotion()
 
   return (
-    <section id="home" className={reduceMotion ? 'min-h-[90vh] py-16' : 'h-[170vh]'}>
+    <section id="home" className={reduceMotion ? 'min-h-[90vh] py-16' : '-mt-8 h-[170vh]'}>
       <Fidelity
         level={level}
         className={`flex flex-col justify-center gap-5 ${reduceMotion ? '' : 'sticky top-0 h-[calc(100vh-62px)] md:top-14 md:h-[calc(100vh-3.5rem)]'}`}
