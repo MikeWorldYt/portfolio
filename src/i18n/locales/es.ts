@@ -33,7 +33,6 @@ export const es: Dictionary = {
   },
   home: {
     wireTag: '[ Hero · Sobre mí ]',
-    wireRole: 'Product Engineer',
     wireCta: '[ CTA ]',
     tag: 'Product Engineer · UX',
     title: 'Mike Diaz',

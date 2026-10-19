@@ -31,7 +31,6 @@ export const en = {
   },
   home: {
     wireTag: '[ Hero · About me ]',
-    wireRole: 'Product Engineer',
     wireCta: '[ CTA ]',
     tag: 'Product Engineer · UX',
     title: 'Mike Diaz',

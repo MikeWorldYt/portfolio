@@ -30,7 +30,7 @@ export function Home() {
             level={level}
             className="sticky top-[calc((100vh-var(--H))/2)] mt-[calc((100vh-var(--H))/2)] [--H:min(56vh,440px)]"
           >
-            <div id="wf-01-image" data-fg-from="right bottom" className="fg-item">
+            <div id="wf-01-image" data-fg-from="bottom" className="fg-item">
               <ImagePlaceholder label={t.home.imageAlt} className="h-(--H) [--x:calc(1_-_var(--t))]">
                 <Icon icon={faUser} className="text-7xl opacity-70" />
               </ImagePlaceholder>

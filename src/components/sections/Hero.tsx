@@ -18,7 +18,7 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
         level={level}
         className={`flex flex-col justify-center gap-5 ${reduceMotion ? '' : 'sticky top-0 h-[calc(100vh-62px)] md:top-14 md:h-[calc(100vh-3.5rem)]'}`}
       >
-        <div id="wf-01-image-mobile" data-fg-from="right bottom" className="fg-item md:hidden">
+        <div id="wf-01-image-mobile" data-fg-from="bottom" className="fg-item md:hidden">
           <ImagePlaceholder label={t.home.imageAlt} className="h-[min(26vh,200px)] [--x:calc(1_-_var(--t))]">
             <Icon icon={faUser} className="text-5xl" />
           </ImagePlaceholder>
@@ -31,14 +31,11 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
             <span id="wf-02-tag" data-fg-from="left top" className="fg-text mb-3 block w-fit text-sm">
               {t.home.wireTag}
             </span>
-            <div id="wf-03-title" data-fg-from="left bottom" className={`${bar} fg-item mb-5 h-14 w-[55%]`} />
-            <div id="wf-04-role" data-fg-from="right top" className="fg-text w-fit text-xl font-bold">
-              {t.home.wireRole}
-            </div>
-            <div id="wf-05-text-1" data-fg-from="left" className={`${bar} fg-item w-[95%]`} />
+            <div id="wf-03-title" data-fg-from="left top" className={`${bar} fg-item mb-5 h-14 w-[55%]`} />
+            <div id="wf-05-text-1" data-fg-from="right" className={`${bar} fg-item w-[95%]`} />
             <div id="wf-06-text-2" data-fg-from="right" className={`${bar} fg-item w-[82%]`} />
-            <div id="wf-07-text-3" data-fg-from="left bottom" className={`${bar} fg-item w-[58%]`} />
-            <span id="wf-08-cta" data-fg-from="right bottom" className="fx fg-item mt-6 inline-block px-8 py-4 text-lg">
+            <div id="wf-07-text-3" data-fg-from="right" className={`${bar} fg-item w-[58%]`} />
+            <span id="wf-08-cta" data-fg-from="bottom" className="fx fg-item mt-6 inline-block px-8 py-4 text-lg">
               {t.home.wireCta}
             </span>
           </div>

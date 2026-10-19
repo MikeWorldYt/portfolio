@@ -3,9 +3,9 @@ import { sections } from '../../data/sections.ts'
 import { useActiveSection } from '../../hooks/useActiveSection.ts'
 import { useHashScroll } from '../../hooks/useHashScroll.ts'
 import { useScrollDebug } from '../../hooks/useScrollDebug.ts'
-import { useScrolledPastHero } from '../../hooks/useScrolledPastHero.ts'
 import { useStepScroll } from '../../hooks/useStepScroll.ts'
 import { useWaterTheme } from '../../hooks/useWaterTheme.ts'
+import { useIntroPhase } from '../../utils/introPhase.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
 import { ThemeContext } from '../ui/themeContext.ts'
 import { FloatingShapes } from '../ui/FloatingShapes.tsx'
@@ -18,21 +18,17 @@ import type { NavMode } from './Navigation.tsx'
 
 const sectionIds = sections.map(({ id }) => id)
 
-const contentOffset = {
-  side: 'md:pl-47',
-  top: 'md:pt-14',
-}
-
 export function Layout() {
   const { t } = useLocale()
   const onHome = useLocation().pathname === '/'
-  const pastHero = useScrolledPastHero()
+  const introPhase = useIntroPhase()
   const { active, level } = useActiveSection(sectionIds, onHome)
   const { rising, theme } = useWaterTheme('technologies')
   useHashScroll()
   useStepScroll(onHome)
   useScrollDebug()
-  const mode: NavMode = onHome && !pastHero ? 'side' : 'top'
+  // The side-menu only exists while the lo-fi intro plays; the page itself is laid out for the top bar.
+  const mode: NavMode = onHome && introPhase === 'side' ? 'side' : 'top'
 
   return (
     <ThemeContext.Provider value={theme}>
@@ -56,7 +52,7 @@ export function Layout() {
       <Navigation mode={mode} level={level} theme={theme} active={active} />
       {onHome && <StepNav ids={sectionIds} />}
       <div
-        className={`flex min-h-screen flex-col pb-[62px] md:pb-0 md:transition-[padding] md:duration-[550ms] motion-reduce:transition-none ${contentOffset[mode]}`}
+        className={`flex min-h-screen flex-col pb-[62px] md:pb-0 md:pt-14`}
       >
         <main id="main" tabIndex={-1} className="flex-1 px-4 py-8 focus:outline-none">
           <Outlet />
