@@ -63,6 +63,7 @@ export const es: Dictionary = {
     title: 'Proyectos',
     intro: 'Trabajo seleccionado.',
     readMore: 'Ver todos los proyectos',
+    carousel: 'Proyectos',
     items: {
       yuuka: { title: 'Yuuka Agent', description: 'Agente de IA en un chat de WhatsApp que organiza tu agenda, eventos de calendario y tareas, conectado a las APIs de Google y Meta.' },
       antSystem: { title: 'ANT System', description: 'Método de organización para gestionar archivos y carpetas con consistencia, claridad y una estructura pensada para automatizar.' },
