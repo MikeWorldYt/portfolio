@@ -363,6 +363,11 @@ export function WireframeIntro() {
     const onScroll = () => {
       if (window.scrollY > window.innerHeight * wireframeRatio) finish()
     }
+    // Scroll is locked meanwhile, so a click or Esc is the way to skip straight to the hero.
+    const skip = () => finish(true)
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') skip()
+    }
 
     frame = requestAnimationFrame(track)
     lockScroll(true)
@@ -370,8 +375,12 @@ export function WireframeIntro() {
     if (desktop) playDesktop()
     else playMobile()
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('pointerdown', skip)
+    window.addEventListener('keydown', onKey)
     return () => {
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('pointerdown', skip)
+      window.removeEventListener('keydown', onKey)
       window.clearTimeout(timer)
       cancelAnimationFrame(frame)
       stopBlur()
