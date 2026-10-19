@@ -40,18 +40,27 @@ export function StepNav({ ids }: { ids: readonly string[] }) {
   }
 
   useEffect(() => {
-    const onScroll = () => {
-      setEdges({ prev: prevStop(ids) !== undefined, next: nextStop(ids) !== undefined })
+    let frame = 0
+    const measure = () => {
+      frame = 0
+      const prev = prevStop(ids) !== undefined
+      const next = nextStop(ids) !== undefined
+      setEdges((edges) => (edges.prev === prev && edges.next === next ? edges : { prev, next }))
       setReady(window.scrollY > window.innerHeight * wireframeRatio)
+    }
+    // Measured once per frame, and state only changes when an edge flips.
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(measure)
     }
     const onPointerDown = (event: PointerEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false)
     }
 
-    onScroll()
+    measure()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('pointerdown', onPointerDown)
     return () => {
+      cancelAnimationFrame(frame)
       window.clearTimeout(timerRef.current)
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('pointerdown', onPointerDown)
