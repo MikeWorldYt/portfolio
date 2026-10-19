@@ -177,3 +177,9 @@
   /* color: #1249b8; */
   filter: drop-shadow(3px 2px 3px #c3c3c38d);
 }
+
+/* Project cards in the dark theme bend the backdrop like the tiles (Chromium); unlayered so it beats the fx utility. */
+.lg-refract [data-theme='dark'] .lg-card {
+  -webkit-backdrop-filter: url(#liquid-glass-card) blur(10px) saturate(1.6);
+  backdrop-filter: url(#liquid-glass-card) blur(10px) saturate(1.6);
+}

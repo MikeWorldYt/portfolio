@@ -83,7 +83,7 @@ export function StepNav({ ids }: { ids: readonly string[] }) {
       ref={rootRef}
       aria-label={t.stepNav.label}
       data-theme={theme}
-      className="pointer-events-none fixed top-1/2 -right-[3px] z-20 h-56 w-28 -translate-y-1/2"
+      className="pointer-events-none fixed top-1/2 -right-[3px] max-md:hidden z-20 h-56 w-28 -translate-y-1/2"
     >
       <svg width="0" height="0" aria-hidden="true" className="absolute">
         <filter id="step-goo" x="-50%" y="-50%" width="200%" height="200%">

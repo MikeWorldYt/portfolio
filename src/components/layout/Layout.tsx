@@ -2,7 +2,7 @@ import { Outlet, useLocation } from 'react-router'
 import { sections } from '../../data/sections.ts'
 import { useActiveSection } from '../../hooks/useActiveSection.ts'
 import { useHashScroll } from '../../hooks/useHashScroll.ts'
-import { useScrollDebug } from '../../hooks/useScrollDebug.ts'
+// import { useScrollDebug } from '../../hooks/useScrollDebug.ts'
 import { useWaterTheme } from '../../hooks/useWaterTheme.ts'
 import { useIntroPhase } from '../../utils/introPhase.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
@@ -24,7 +24,7 @@ export function Layout() {
   const { active, level } = useActiveSection(sectionIds, onHome)
   const { rising, theme } = useWaterTheme('technologies')
   useHashScroll()
-  useScrollDebug()
+  // useScrollDebug()
   // The side-menu only exists while the lo-fi intro plays; the page itself is laid out for the top bar.
   const mode: NavMode = onHome && introPhase === 'side' ? 'side' : 'top'
 
