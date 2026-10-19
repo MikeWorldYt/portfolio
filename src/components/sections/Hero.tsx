@@ -56,7 +56,7 @@ export function Hero({ level, progress }: { level: 'lo' | 'mid'; progress: numbe
         </div>
         {/* One button for both layers: the lo-fi placeholder label turns into the real call to action. */}
         <div id="wf-08-cta" data-fg-from="bottom" className="fg-item w-fit">
-          <Button to="#contact" variant="fx" size="lg">
+          <Button to="contact" variant="fx" size="lg">
             <span className="grid justify-items-center">
               <span aria-hidden="true" className="col-start-1 row-start-1 opacity-[calc(1_-_var(--t))]">
                 {t.home.wireCta}
