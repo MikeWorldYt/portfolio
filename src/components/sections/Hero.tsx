@@ -5,10 +5,13 @@ import { Button } from '../ui/Button.tsx'
 import { Fidelity } from '../ui/Fidelity.tsx'
 import { Icon } from '../ui/Icon.tsx'
 import { ImagePlaceholder } from '../ui/ImagePlaceholder.tsx'
+import { TypedText } from '../ui/TypedText.tsx'
 
-const bar = 'my-3 h-4 rounded-sm bg-gray-500'
+// The title types out over the first part of the lo → mid scroll, the intro over the rest.
+const titleShare = 0.35
+const clamp = (value: number) => Math.min(1, Math.max(0, value))
 
-export function Hero({ level }: { level: 'lo' | 'mid' }) {
+export function Hero({ level, progress }: { level: 'lo' | 'mid'; progress: number }) {
   const { t } = useLocale()
   const reduceMotion = usePrefersReducedMotion()
 
@@ -23,33 +26,44 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
             <Icon icon={faUser} className="text-5xl" />
           </ImagePlaceholder>
         </div>
-        <div className="grid">
-          <div
-            aria-hidden="true"
-            className={`col-start-1 row-start-1 opacity-[calc(1_-_var(--t))] ${level === 'lo' ? '' : 'pointer-events-none'}`}
-          >
-            <span id="wf-02-tag" data-fg-from="left top" className="fg-text mb-3 block w-fit text-sm">
+        <div>
+          <div className="mb-3 grid">
+            <span
+              id="wf-02-tag"
+              data-fg-from="left top"
+              aria-hidden="true"
+              className="fg-text col-start-1 row-start-1 block w-fit text-sm opacity-[calc(1_-_var(--t))]"
+            >
               {t.home.wireTag}
             </span>
-            <div id="wf-03-title" data-fg-from="left top" className={`${bar} fg-item mb-5 h-14 w-[55%]`} />
-            <div id="wf-05-text-1" data-fg-from="right" className={`${bar} fg-item w-[95%]`} />
-            <div id="wf-06-text-2" data-fg-from="right" className={`${bar} fg-item w-[82%]`} />
-            <div id="wf-07-text-3" data-fg-from="right" className={`${bar} fg-item w-[58%]`} />
-            <span id="wf-08-cta" data-fg-from="bottom" className="fx fg-item mt-6 inline-block px-8 py-4 text-lg">
-              {t.home.wireCta}
-            </span>
+            <span className="col-start-1 row-start-1 block text-sm opacity-[calc(var(--t)*0.8)]">{t.home.tag}</span>
           </div>
-          <div
-            inert={level === 'lo'}
-            className={`col-start-1 row-start-1 opacity-(--t) ${level === 'lo' ? 'pointer-events-none' : ''}`}
+          {/* Sans in every level, so the lo-fi bars already wrap like the real text they type into. */}
+          <h1
+            id="wf-03-title"
+            data-fg-from="left top"
+            className="fg-item mb-5 w-fit font-sans text-5xl leading-[1.05] font-bold md:text-6xl lg:text-7xl"
           >
-            <span className="mb-3 block text-sm opacity-80">{t.home.tag}</span>
-            <h1 className="mb-5 text-5xl leading-[1.05] font-bold md:text-6xl lg:text-7xl">{t.home.title}</h1>
-            <p className="mb-8 text-xl leading-relaxed md:max-w-[50vw] lg:text-2xl">{t.home.intro}</p>
-            <Button to="#contact" variant="fx" size="lg">
-              {t.home.cta}
-            </Button>
-          </div>
+            <TypedText text={t.home.title} progress={clamp(progress / titleShare)} />
+          </h1>
+          <p
+            id="wf-05-text"
+            data-fg-from="right"
+            className="fg-item mb-3 w-fit font-sans text-xl leading-relaxed md:max-w-[50vw] lg:text-2xl"
+          >
+            <TypedText text={t.home.intro} progress={clamp((progress - titleShare) / (1 - titleShare))} />
+          </p>
+        </div>
+        {/* One button for both layers: the lo-fi placeholder label turns into the real call to action. */}
+        <div id="wf-08-cta" data-fg-from="bottom" className="fg-item w-fit">
+          <Button to="#contact" variant="fx" size="lg">
+            <span className="grid justify-items-center">
+              <span aria-hidden="true" className="col-start-1 row-start-1 opacity-[calc(1_-_var(--t))]">
+                {t.home.wireCta}
+              </span>
+              <span className="col-start-1 row-start-1 opacity-(--t)">{t.home.cta}</span>
+            </span>
+          </Button>
         </div>
       </Fidelity>
     </section>
