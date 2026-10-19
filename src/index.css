@@ -46,6 +46,11 @@
   --t: 0;
 }
 
+/* Explicit canvas: a transparent page would show whatever the host paints behind it (dark in dark embeds). */
+html {
+  background-color: #fff;
+}
+
 /* Registered so the mobile nav's notch and bubble can glide between items. */
 @property --notch {
   syntax: '<percentage>';
