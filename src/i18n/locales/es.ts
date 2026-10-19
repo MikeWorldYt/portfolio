@@ -32,13 +32,13 @@ export const es: Dictionary = {
     label: 'Cambiar idioma',
   },
   home: {
+    building: 'Construyéndolo... por favor espera',
     wireTag: '[ Hero · Sobre mí ]',
     wireCta: '[ CTA ]',
     tag: 'Product Engineer · UX',
     title: 'Mike Diaz',
     intro: 'Creador de productos digitales con enfoque de Experiencia de Usuario y profundidad técnica, acelerados por IA.',
     cta: 'Hablemos',
-    scroll: 'Scroll',
     imageAlt: 'Imagen de ejemplo',
   },
   skills: {

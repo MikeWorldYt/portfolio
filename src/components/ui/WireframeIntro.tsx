@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion.ts'
+import { useLocale } from '../../i18n/useLocale.ts'
+import { heroStop, scrollToStop } from '../../utils/stepStops.ts'
 import { setIntroPhase } from '../../utils/introPhase.ts'
 import type { IntroPhase } from '../../utils/introPhase.ts'
 
 const moveMs = 300
 const actionGapMs = 220
 const pauseMs = 1000
+const buildingMs = 1400
 const mobileStepMs = 650
 const wireframeRatio = 0.12
 const alignTolerance = 2
@@ -96,7 +99,9 @@ function draftTransform(final: Box, draft: Draft) {
 // one by one in their id order (wf-NN-*).
 export function WireframeIntro() {
   const reduceMotion = usePrefersReducedMotion()
+  const { t } = useLocale()
   const [selection, setSelection] = useState<Selection | null>(null)
+  const [building, setBuilding] = useState(false)
 
   useEffect(() => {
     const all = [...document.querySelectorAll<HTMLElement>('[id^="wf-"]')]
@@ -135,15 +140,18 @@ export function WireframeIntro() {
       frame = requestAnimationFrame(track)
     }
 
-    const finish = () => {
+    // A completed intro moves on by itself to the hero's mid-fi state; an interrupted one just resolves.
+    const finish = (advance = false) => {
       if (finished) return
       finished = true
       window.clearTimeout(timer)
       cancelAnimationFrame(frame)
+      setBuilding(false)
       setSelection(null)
       reset()
       showAll()
       setIntroPhase('done')
+      if (advance) scrollToStop(heroStop(), false)
     }
 
     const playDesktop = () => {
@@ -159,7 +167,7 @@ export function WireframeIntro() {
 
       const run = (index: number) => {
         if (index >= actions.length) {
-          timer = window.setTimeout(finish, pauseMs)
+          timer = window.setTimeout(() => finish(true), pauseMs)
           return
         }
         const action = actions[index]
@@ -195,7 +203,7 @@ export function WireframeIntro() {
       let index = 0
       const next = () => {
         if (index >= items.length) {
-          finish()
+          finish(true)
           return
         }
         items[index].dataset.fg = 'in'
@@ -211,8 +219,12 @@ export function WireframeIntro() {
     }
 
     frame = requestAnimationFrame(track)
-    if (desktop) playDesktop()
-    else playMobile()
+    setBuilding(true)
+    timer = window.setTimeout(() => {
+      setBuilding(false)
+      if (desktop) playDesktop()
+      else playMobile()
+    }, buildingMs)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
@@ -222,6 +234,13 @@ export function WireframeIntro() {
     }
   }, [reduceMotion])
 
+  if (building) {
+    return (
+      <p role="status" className="pointer-events-none fixed inset-0 z-30 grid place-items-center font-mono text-sm text-gray-500">
+        <span className="animate-pulse motion-reduce:animate-none">{t.home.building}</span>
+      </p>
+    )
+  }
   if (!selection) return null
   return <SelectionOverlay {...selection} />
 }

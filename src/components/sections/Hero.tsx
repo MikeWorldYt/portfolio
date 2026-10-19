@@ -50,7 +50,6 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
             </Button>
           </div>
         </div>
-        <p className="text-sm opacity-80">↓ {t.home.scroll}</p>
       </Fidelity>
     </section>
   )

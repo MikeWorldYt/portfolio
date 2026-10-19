@@ -30,13 +30,13 @@ export const en = {
     label: 'Switch language',
   },
   home: {
+    building: 'Building it... please wait',
     wireTag: '[ Hero · About me ]',
     wireCta: '[ CTA ]',
     tag: 'Product Engineer · UX',
     title: 'Mike Diaz',
     intro: 'A product-minded approach to crafting exceptional digital experiences with UX vision and technical depth, accelerated with AI.',
     cta: 'Let us talk',
-    scroll: 'Scroll',
     imageAlt: 'Placeholder image',
   },
   skills: {

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion.ts'
-import { claimPointer, contentSelector } from '../../utils/pointerClaim.ts'
+import { contentSelector } from '../../utils/pointerClaim.ts'
 import { createBody, hitTest, push, step } from '../../utils/spacePhysics.ts'
 import type { Body } from '../../utils/spacePhysics.ts'
 
@@ -52,7 +52,6 @@ export function FloatingShapes({ active }: { active: boolean }) {
       const body = shapeAt(event)
       if (!body) return
       push(body, event.clientX, event.clientY)
-      claimPointer()
     }
     const onMove = (event: PointerEvent) => {
       document.body.style.cursor = shapeAt(event) ? 'pointer' : ''
