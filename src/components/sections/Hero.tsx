@@ -40,6 +40,7 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
             </span>
           </div>
           <div
+            inert={level === 'lo'}
             className={`col-start-1 row-start-1 opacity-(--t) ${level === 'lo' ? 'pointer-events-none' : ''}`}
           >
             <span className="mb-3 block text-sm opacity-80">{t.home.tag}</span>
