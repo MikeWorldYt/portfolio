@@ -18,21 +18,26 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
         level={level}
         className={`flex flex-col justify-center gap-5 ${reduceMotion ? '' : 'sticky top-0 h-[calc(100vh-62px)] md:top-14 md:h-[calc(100vh-3.5rem)]'}`}
       >
-        <ImagePlaceholder
-          label={t.home.imageAlt}
-          className="h-[min(26vh,200px)] [--x:calc(1_-_var(--t))] md:hidden"
-        >
-          <Icon icon={faUser} className="text-5xl" />
-        </ImagePlaceholder>
+        <div id="wf-01-image-mobile" data-fg-from="bottom" className="fg-item md:hidden">
+          <ImagePlaceholder label={t.home.imageAlt} className="h-[min(26vh,200px)] [--x:calc(1_-_var(--t))]">
+            <Icon icon={faUser} className="text-5xl" />
+          </ImagePlaceholder>
+        </div>
         <div className="grid">
-          <div aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 opacity-[calc(1_-_var(--t))]">
-            <span className="mb-3 block text-sm">{t.home.wireTag}</span>
-            <div className={`${bar} mb-5 h-14 w-[55%]`} />
-            <div className="text-xl font-bold">{t.home.wireRole}</div>
-            <div className={`${bar} w-[95%]`} />
-            <div className={`${bar} w-[82%]`} />
-            <div className={`${bar} w-[58%]`} />
-            <span className="fx mt-6 inline-block px-8 py-4 text-lg">{t.home.wireCta}</span>
+          <div
+            aria-hidden="true"
+            className={`col-start-1 row-start-1 opacity-[calc(1_-_var(--t))] ${level === 'lo' ? '' : 'pointer-events-none'}`}
+          >
+            <span id="wf-02-tag" data-fg-from="left top" className="fg-text mb-3 block w-fit text-sm">
+              {t.home.wireTag}
+            </span>
+            <div id="wf-03-title" data-fg-from="left top" className={`${bar} fg-item mb-5 h-14 w-[55%]`} />
+            <div id="wf-05-text-1" data-fg-from="right" className={`${bar} fg-item w-[95%]`} />
+            <div id="wf-06-text-2" data-fg-from="right" className={`${bar} fg-item w-[82%]`} />
+            <div id="wf-07-text-3" data-fg-from="right" className={`${bar} fg-item w-[58%]`} />
+            <span id="wf-08-cta" data-fg-from="bottom" className="fx fg-item mt-6 inline-block px-8 py-4 text-lg">
+              {t.home.wireCta}
+            </span>
           </div>
           <div
             className={`col-start-1 row-start-1 opacity-(--t) ${level === 'lo' ? 'pointer-events-none' : ''}`}
@@ -45,7 +50,6 @@ export function Hero({ level }: { level: 'lo' | 'mid' }) {
             </Button>
           </div>
         </div>
-        <p className="text-sm opacity-80">↓ {t.home.scroll}</p>
       </Fidelity>
     </section>
   )

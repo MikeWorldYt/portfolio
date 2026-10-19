@@ -8,6 +8,7 @@ import { Technologies } from '../components/sections/Technologies.tsx'
 import { Fidelity } from '../components/ui/Fidelity.tsx'
 import { Icon } from '../components/ui/Icon.tsx'
 import { ImagePlaceholder } from '../components/ui/ImagePlaceholder.tsx'
+import { WireframeIntro } from '../components/ui/WireframeIntro.tsx'
 import { useHeroProgress } from '../hooks/useHeroProgress.ts'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion.ts'
 import { useLocale } from '../i18n/useLocale.ts'
@@ -18,6 +19,7 @@ export function Home() {
 
   return (
     <div className="mx-auto w-full max-w-6xl">
+      <WireframeIntro />
       <div className="md:grid md:grid-cols-[1.1fr_0.9fr] md:gap-12">
         <div>
           <Hero level={level} />
@@ -28,9 +30,11 @@ export function Home() {
             level={level}
             className="sticky top-[calc((100vh-var(--H))/2)] mt-[calc((100vh-var(--H))/2)] [--H:min(56vh,440px)]"
           >
-            <ImagePlaceholder label={t.home.imageAlt} className="h-(--H) [--x:calc(1_-_var(--t))]">
-              <Icon icon={faUser} className="text-7xl opacity-70" />
-            </ImagePlaceholder>
+            <div id="wf-01-image" data-fg-from="bottom" className="fg-item">
+              <ImagePlaceholder label={t.home.imageAlt} className="h-(--H) [--x:calc(1_-_var(--t))]">
+                <Icon icon={faUser} className="text-7xl opacity-70" />
+              </ImagePlaceholder>
+            </div>
           </Fidelity>
         </aside>
       </div>

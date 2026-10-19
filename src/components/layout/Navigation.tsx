@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router'
 import { sections } from '../../data/sections.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
+import { scrollToSection } from '../../utils/stepStops.ts'
 import { Icon } from '../ui/Icon.tsx'
 import type { FidelityLevel } from '../ui/Fidelity.tsx'
 import { LocaleSwitch } from './LocaleSwitch.tsx'
@@ -47,13 +48,15 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
   const scrollTo = (id: string) => (event: React.MouseEvent) => {
     if (!onHome) return
     event.preventDefault()
-    document.getElementById(id)?.scrollIntoView()
+    scrollToSection(id)
   }
 
   return (
     <>
       <LocaleSwitch className="fixed top-2 right-2 z-10 md:hidden" />
       <nav
+        id={onHome ? 'wf-00-navbar' : undefined}
+        data-fg-from="left"
         data-fi={level}
         data-theme={theme}
         aria-label={t.nav.label}
@@ -70,7 +73,7 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
                   aria-current={active === id ? 'true' : undefined}
                   className="flex h-[62px] flex-col items-center justify-center gap-0.5 text-[10.5px] opacity-80 focus-visible:outline-2 focus-visible:-outline-offset-2 aria-[current=true]:bg-(--act) aria-[current=true]:font-bold aria-[current=true]:opacity-100 md:h-[38px] md:flex-row md:justify-start md:gap-2.5 md:px-3 md:text-sm md:rounded-(--r)"
                 >
-                  <Icon icon={icon} className="text-xl md:text-base" />
+                  <Icon icon={icon} className="text-xl in-data-[fi=lo]:[--fa-display:none] md:text-base" />
                   <span>{t.nav.items[id]}</span>
                 </Link>
               </li>
