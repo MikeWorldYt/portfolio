@@ -7,6 +7,7 @@ export function useHashScroll() {
 
   useEffect(() => {
     if (!hash) return
-    scrollToSection(hash.slice(1))
+    // Arriving from another route lands instantly, so the page never replays the scroll-driven transitions.
+    scrollToSection(hash.slice(1), 'instant')
   }, [pathname, hash])
 }

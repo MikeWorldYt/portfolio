@@ -19,10 +19,13 @@ const sectionIds = sections.map(({ id }) => id)
 
 export function Layout() {
   const { t } = useLocale()
-  const onHome = useLocation().pathname === '/'
+  const { pathname } = useLocation()
+  const onHome = pathname === '/'
+  // Projects and Contact are always hi-fi: the dark water is already up when they open.
+  const alwaysDark = pathname === '/projects' || pathname === '/contact'
   const introPhase = useIntroPhase()
   const { active, level } = useActiveSection(sectionIds, onHome)
-  const { rising, theme } = useWaterTheme('technologies')
+  const { rising, theme } = useWaterTheme('technologies', alwaysDark)
   useHashScroll()
   // useScrollDebug()
   // The side-menu only exists while the lo-fi intro plays; the page itself is laid out for the top bar.

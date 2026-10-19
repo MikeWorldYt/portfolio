@@ -58,6 +58,9 @@ const steps: Action[][] = [
   ],
 ]
 
+// The intro plays once per page load; coming back to Home from another route lands straight on the content.
+let introPlayed = false
+
 type Box = { left: number; top: number; width: number; height: number; right: number; bottom: number }
 
 const toBox = (rect: DOMRect): Box => ({
@@ -120,9 +123,10 @@ export function WireframeIntro() {
         element.style.transformOrigin = ''
       })
 
-    if (reduceMotion || window.scrollY > window.innerHeight * wireframeRatio) {
+    if (introPlayed || window.location.hash || reduceMotion || window.scrollY > window.innerHeight * wireframeRatio) {
       showAll()
       setIntroPhase('done')
+      if (introPlayed && !window.location.hash) window.scrollTo({ top: heroStop(), behavior: 'instant' })
       return
     }
 
@@ -150,6 +154,7 @@ export function WireframeIntro() {
     const finish = (advance = false) => {
       if (finished) return
       finished = true
+      introPlayed = true
       window.clearTimeout(timer)
       cancelAnimationFrame(frame)
       setBuilding(false)
