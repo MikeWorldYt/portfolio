@@ -9,6 +9,9 @@ const moveMs = 300
 const actionGapMs = 220
 const mobileStepMs = 650
 const glideMs = 2600
+// Motion blur strength: px of blur per px travelled at peak speed, capped per axis.
+const blurPerPx = 1 / 5
+const maxBlur = 1
 const wireframeRatio = 0.12
 const alignTolerance = 2
 const purple = '#8a38f5'
@@ -105,6 +108,9 @@ function glideTo(top: number) {
   frame = requestAnimationFrame(step)
 }
 
+const movingIds = [...new Set(steps.flatMap((step) => step.actions.filter((action) => action.to !== undefined).map((action) => action.id)))]
+const blurId = (id: string) => `motion-blur-${id}`
+
 // The intro plays once per page load; coming back to Home from another route lands straight on the content.
 let introPlayed = false
 
@@ -180,6 +186,7 @@ export function WireframeIntro() {
         element.style.transform = ''
         element.style.transition = ''
         element.style.transformOrigin = ''
+        element.style.filter = ''
       })
 
     if (introPlayed || window.location.hash || reduceMotion || window.scrollY > window.innerHeight * wireframeRatio) {
@@ -195,6 +202,33 @@ export function WireframeIntro() {
     let focus: HTMLElement[][] = []
     let centered: HTMLElement | undefined
     let timer = 0
+    const blurFrames = new Set<number>()
+    // After Effects-like motion blur: a directional blur along the move that peaks with the ease-out's speed.
+    const blurMove = (element: HTMLElement, dx: number, dy: number, ms: number) => {
+      const node = document.querySelector(`#${blurId(element.id)} feGaussianBlur`)
+      if (!node || ms <= 0) return
+      const peakX = Math.min(maxBlur, Math.abs(dx) * blurPerPx)
+      const peakY = Math.min(maxBlur, Math.abs(dy) * blurPerPx)
+      if (peakX < 0.5 && peakY < 0.5) return
+      element.style.filter = `url(#${blurId(element.id)})`
+      const began = performance.now()
+      const tick = (now: number) => {
+        blurFrames.delete(frameId)
+        const linear = Math.min(1, (now - began) / ms)
+        const speed = 6.75 * linear * (1 - linear) ** 2
+        node.setAttribute('stdDeviation', `${peakX * speed} ${peakY * speed}`)
+        if (linear < 1) {
+          frameId = requestAnimationFrame(tick)
+          blurFrames.add(frameId)
+        } else element.style.filter = ''
+      }
+      let frameId = requestAnimationFrame(tick)
+      blurFrames.add(frameId)
+    }
+    const stopBlur = () => {
+      blurFrames.forEach((id) => cancelAnimationFrame(id))
+      blurFrames.clear()
+    }
     let frame = 0
     let finished = false
 
@@ -232,6 +266,7 @@ export function WireframeIntro() {
       introPlayed = true
       window.clearTimeout(timer)
       cancelAnimationFrame(frame)
+      stopBlur()
       setBuilding(false)
       setSelections([])
       reset()
@@ -256,7 +291,16 @@ export function WireframeIntro() {
         element.style.transition = motionFor(element, ms)
         if (action.to !== undefined) {
           const final = finals.get(action.id)
-          if (final) element.style.transform = action.to ? draftTransform(final, action.to) : 'none'
+          if (final) {
+            const from = element.getBoundingClientRect()
+            const sx = window.innerWidth / reference.width
+            const sy = window.innerHeight / reference.height
+            const to = action.to
+              ? { x: (action.to.x + action.to.w / 2) * sx, y: (action.to.y + action.to.h / 2) * sy }
+              : { x: final.left + final.width / 2, y: final.top + final.height / 2 }
+            element.style.transform = action.to ? draftTransform(final, action.to) : 'none'
+            blurMove(element, to.x - (from.left + from.width / 2), to.y - (from.top + from.height / 2), ms)
+          }
         }
         if (action.show) element.dataset.fg = 'in'
         return element
@@ -330,6 +374,7 @@ export function WireframeIntro() {
       window.removeEventListener('scroll', onScroll)
       window.clearTimeout(timer)
       cancelAnimationFrame(frame)
+      stopBlur()
       reset()
       raiseStage(false)
       lockScroll(false)
@@ -339,6 +384,13 @@ export function WireframeIntro() {
   // The message stays for the whole intro, low on the screen so it never covers the drafted layout.
   return (
     <>
+      <svg width="0" height="0" aria-hidden="true" className="absolute">
+        {movingIds.map((id) => (
+          <filter key={id} id={blurId(id)} x="-25%" y="-25%" width="150%" height="150%">
+            <feGaussianBlur stdDeviation="0" />
+          </filter>
+        ))}
+      </svg>
       {building && (
         <p
           role="status"
