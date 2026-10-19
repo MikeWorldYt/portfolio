@@ -61,6 +61,7 @@ export const en = {
     title: 'Projects',
     intro: 'Selected work.',
     readMore: 'View all projects',
+    carousel: 'Projects',
     items: {
       yuuka: { title: 'Yuuka Agent', description: 'AI agent in a WhatsApp chat that organizes your agenda, calendar events and tasks, connected to Google APIs and Meta.' },
       antSystem: { title: 'ANT System', description: 'Organizational method for managing files and folders with consistency, clarity and an automation-friendly structure.' },

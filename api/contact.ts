@@ -6,6 +6,7 @@ const turnstileUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const minMessageLength = 10
 const maxLength = { name: 200, email: 320, message: 5000 }
+const rateLimit = { max: 5, windowMs: 10 * 60 * 1000 }
 
 const reply = (status: number, error?: string) =>
   Response.json(error ? { error } : { ok: true }, { status })
@@ -31,8 +32,26 @@ async function isHuman(token: string, ip: string | null) {
   return data.success
 }
 
+const clientIp = (request: Request) =>
+  request.headers.get('x-real-ip') ?? request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? null
+
+const openDb = () => createClient({ url: process.env.TURSO_DATABASE_URL ?? '', authToken: process.env.TURSO_AUTH_TOKEN })
+
+// Counts and records the attempt in one place so a burst cannot slip between check and insert.
+async function isRateLimited(ip: string) {
+  const db = openDb()
+  await db.execute('CREATE TABLE IF NOT EXISTS rate_limits (ip TEXT NOT NULL, created_at INTEGER NOT NULL)')
+  const since = Date.now() - rateLimit.windowMs
+  await db.execute({ sql: 'DELETE FROM rate_limits WHERE created_at < ?', args: [since] })
+  const result = await db.execute({
+    sql: 'INSERT INTO rate_limits (ip, created_at) SELECT ?, ? WHERE (SELECT COUNT(*) FROM rate_limits WHERE ip = ?) < ?',
+    args: [ip, Date.now(), ip, rateLimit.max],
+  })
+  return result.rowsAffected === 0
+}
+
 async function saveMessage(name: string, email: string, message: string) {
-  const db = createClient({ url: process.env.TURSO_DATABASE_URL ?? '', authToken: process.env.TURSO_AUTH_TOKEN })
+  const db = openDb()
   await db.execute(
     `CREATE TABLE IF NOT EXISTS messages (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -63,7 +82,8 @@ export async function POST(request: Request) {
   if (typeof token !== 'string' || !token) return reply(400, 'missing_token')
 
   try {
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? null
+    const ip = clientIp(request)
+    if (ip && (await isRateLimited(ip))) return reply(429, 'rate_limited')
     if (!(await isHuman(token, ip))) return reply(403, 'captcha_failed')
     await saveMessage(name, email, message)
     return reply(200)

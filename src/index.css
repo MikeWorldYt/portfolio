@@ -46,6 +46,13 @@
   --t: 0;
 }
 
+/* Registered so the mobile nav's notch and bubble can glide between items. */
+@property --notch {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 8.33%;
+}
+
 [data-fi='lo'] {
   --bg: #f3f4f6;
   --bd: #9ca3af;

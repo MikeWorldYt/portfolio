@@ -15,20 +15,20 @@ import { useLocale } from '../i18n/useLocale.ts'
 
 export function Home() {
   const { t } = useLocale()
-  const level = useHeroProgress(!usePrefersReducedMotion())
+  const { level, progress } = useHeroProgress(!usePrefersReducedMotion())
 
   return (
     <div className="mx-auto w-full max-w-6xl">
       <WireframeIntro />
       <div className="md:grid md:grid-cols-[1.1fr_0.9fr] md:gap-12">
         <div>
-          <Hero level={level} />
+          <Hero level={level} progress={progress} />
           <Skills />
         </div>
         <aside aria-hidden="true" className="hidden md:block">
           <Fidelity
             level={level}
-            className="sticky top-[calc((100vh-var(--H))/2)] mt-[calc((100vh-var(--H))/2)] [--H:min(56vh,440px)]"
+            className="sticky top-[calc(3.5rem+(100vh-3.5rem-var(--H))/2)] mt-[calc((100vh-3.5rem-var(--H))/2-2rem)] [--H:min(56vh,440px)]"
           >
             <div id="wf-01-image" data-fg-from="bottom" className="fg-item">
               <ImagePlaceholder label={t.home.imageAlt} className="h-(--H) [--x:calc(1_-_var(--t))]">

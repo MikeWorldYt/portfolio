@@ -33,7 +33,8 @@ export function useActiveSection(ids: readonly string[], enabled: boolean) {
       let underBar = ids[0]
       for (const id of ids) {
         const rect = document.getElementById(id)?.getBoundingClientRect()
-        if (rect && rect.top <= barY && rect.bottom >= barY) underBar = id
+        // Past the last section (footer under the bar) it keeps the last section that started above the bar.
+        if (rect && rect.top <= barY) underBar = id
       }
       const fidelity = document.querySelector<HTMLElement>(`#${underBar} > [data-fi]`)
       const level = toLevel(fidelity?.dataset.fi)

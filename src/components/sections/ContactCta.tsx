@@ -14,7 +14,7 @@ export function ContactCta() {
         <div aria-hidden="true" className="absolute inset-0 -z-20 rounded-2xl bg-indigo-600" />
         <h2 className="mb-2 text-3xl font-bold">{t.contactCta.title}</h2>
         <p className="mb-4 opacity-90">{t.contactCta.text}</p>
-        <span className="relative z-10 inline-block">
+        <span className="relative z-1 inline-block">
           <Button to="/contact" variant="light">
             {t.contactCta.cta}
             <Icon icon={faArrowRight} />
