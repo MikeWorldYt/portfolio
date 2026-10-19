@@ -79,6 +79,19 @@ export function LiquidGlassFilter() {
         <feImage href={lensMap} x="0" y="0" width={lensSize} height={lensSize} preserveAspectRatio="none" result="map" />
         <feDisplacementMap in="SourceGraphic" in2="map" scale={lensScale} xChannelSelector="R" yChannelSelector="G" />
       </filter>
+      {/* Same lens stretched over any box (cards), at a quarter of the strength. */}
+      <filter
+        id="liquid-glass-card"
+        primitiveUnits="objectBoundingBox"
+        x="0"
+        y="0"
+        width="1"
+        height="1"
+        colorInterpolationFilters="sRGB"
+      >
+        <feImage href={lensMap} x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" />
+        <feDisplacementMap in="SourceGraphic" in2="map" scale="0.25" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
     </svg>
   )
 }

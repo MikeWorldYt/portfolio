@@ -4,11 +4,13 @@
   [id^='wf-'] {
     transition:
       opacity 0.3s ease,
+      visibility 0.3s,
       translate 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   [id^='wf-']:not([data-fg='in']) {
     opacity: 0;
+    visibility: hidden;
     translate: var(--fg-dx, 0) var(--fg-dy, 0);
   }
 

@@ -53,7 +53,9 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
 
   return (
     <>
-      <LocaleSwitch className="fixed top-2 right-2 z-10 md:hidden" />
+      <div id={onHome ? 'wf-09-locale' : undefined} data-fg-from="top" className="fixed top-2 right-2 z-10 md:hidden">
+        <LocaleSwitch />
+      </div>
       <nav
         id={onHome ? 'wf-00-navbar' : undefined}
         data-fg-from="left"

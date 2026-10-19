@@ -43,7 +43,7 @@ export function ContactField({
       </label>
       {multiline ? <textarea rows={6} {...shared} /> : <input type={type} {...shared} />}
       {error && (
-        <p id={errorId} className="mt-1 text-sm text-red-700">
+        <p id={errorId} className="mt-1 text-sm text-red-700 in-data-[theme=dark]:text-red-300">
           {error}
         </p>
       )}

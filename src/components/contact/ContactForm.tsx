@@ -100,7 +100,7 @@ export function ContactForm() {
       </div>
       {status === 'success' && <p role="status">{t.contact.success}</p>}
       {status === 'failure' && (
-        <p role="alert" className="text-red-700">
+        <p role="alert" className="text-red-700 in-data-[theme=dark]:text-red-300">
           {t.contact.failure}
         </p>
       )}

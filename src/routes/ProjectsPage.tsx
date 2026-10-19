@@ -14,7 +14,7 @@ export function ProjectsPage() {
     <Fidelity level="hi" className="mx-auto max-w-4xl py-8">
       <Link
         to={{ pathname: '/', hash: '#projects' }}
-        className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-indigo-600 in-data-[theme=dark]:text-indigo-300 focus-visible:outline-2 focus-visible:outline-offset-2"
       >
         <Icon icon={faArrowLeft} />
         {t.projects.back}

@@ -13,7 +13,7 @@ export function ProjectCard({ project }: { project: ProjectData }) {
   const { title, description } = t.projects.items[project.id]
 
   return (
-    <article className="fx flex h-full flex-col p-4">
+    <article className="fx lg-card flex h-full flex-col p-4">
       <ImagePlaceholder label={t.home.imageAlt} className="mb-3 aspect-[16/10]" />
       <h3 className="font-semibold">{title}</h3>
       <p className="mb-3">{description}</p>

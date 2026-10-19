@@ -28,9 +28,9 @@ export function prevStop(ids: readonly string[]) {
 }
 
 // Home lands on the legible mid-fi hero, not on the lo-fi wireframe at the very top.
-export function scrollToSection(id: string) {
-  if (id === 'home') window.scrollTo({ top: heroStop() })
-  else document.getElementById(id)?.scrollIntoView()
+export function scrollToSection(id: string, behavior: ScrollBehavior = 'smooth') {
+  if (id === 'home') window.scrollTo({ top: heroStop(), behavior })
+  else document.getElementById(id)?.scrollIntoView({ behavior })
 }
 
 export function scrollToStop(top: number, reduceMotion: boolean) {
