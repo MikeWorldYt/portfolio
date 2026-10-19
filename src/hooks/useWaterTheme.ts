@@ -3,6 +3,8 @@ import { usePrefersReducedMotion } from './usePrefersReducedMotion.ts'
 
 const triggerRatio = 0.6
 const themeDelayMs = 1000
+// The receding circle keeps covering most of the page for a while, so the light tokens wait longer.
+const lightDelayMs = 2200
 
 // `forced` keeps the water up (Projects, Contact). When it is released the last state is kept until the next
 // measurement, which waits a tick so a hash scroll lands first and the page does not flash light then dark.
@@ -32,7 +34,7 @@ export function useWaterTheme(sectionId: string, forced = false) {
   }, [sectionId, forced])
 
   useEffect(() => {
-    const timer = setTimeout(() => setDark(rising), reduceMotion || forced ? 0 : themeDelayMs)
+    const timer = setTimeout(() => setDark(rising), reduceMotion || forced ? 0 : rising ? themeDelayMs : lightDelayMs)
     return () => clearTimeout(timer)
   }, [rising, reduceMotion, forced])
 
