@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router'
+import type { CSSProperties } from 'react'
 import { sections } from '../../data/sections.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
 import { scrollToSection } from '../../utils/stepStops.ts'
@@ -44,6 +45,11 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
   const { t } = useLocale()
   const { pathname } = useLocation()
   const onHome = pathname === '/'
+  // Mobile hi-fi: a floating bar whose active item rises into a bubble sitting in a notch of the bar.
+  const floating = level === 'hi'
+  const activeIndex = sections.findIndex(({ id }) => id === active)
+  const notch = { '--notch': `${((activeIndex + 0.5) / sections.length) * 100}%` } as CSSProperties
+  const surface = theme === 'dark' ? 'bg-[#212121] shadow-lg' : 'bg-white shadow-lg'
 
   const scrollTo = (id: string) => (event: React.MouseEvent) => {
     if (!onHome) return
@@ -62,9 +68,22 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
         data-fi={level}
         data-theme={theme}
         aria-label={t.nav.label}
-        className={`fx-nav fixed inset-x-0 bottom-0 z-10 fx-edge-t pb-[env(safe-area-inset-bottom)] md:inset-x-auto md:top-0 md:bottom-auto md:left-0 md:overflow-hidden md:pb-0 ${shape[mode]}`}
+        style={notch}
+        className={`fixed z-10 text-(--c) md:inset-x-auto md:top-0 md:bottom-auto md:left-0 md:overflow-hidden md:pb-0 ${floating ? 'inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] transition-[--notch] duration-500 ease-[cubic-bezier(0.34,1.3,0.64,1)] motion-reduce:transition-none md:fx-nav' : 'fx-nav inset-x-0 bottom-0 fx-edge-t pb-[env(safe-area-inset-bottom)]'} ${shape[mode]}`}
       >
-        <div className={`md:flex md:h-full ${inner[mode]}`}>
+        {floating && (
+          <span aria-hidden="true" className="md:hidden">
+            <span
+              className={`absolute inset-0 rounded-2xl ${surface} ${activeIndex >= 0 ? '[mask:radial-gradient(circle_at_var(--notch)_4px,transparent_33px,#000_34px)]' : ''}`}
+            />
+            {activeIndex >= 0 && (
+              <span
+                className={`absolute top-1 left-(--notch) size-14 -translate-x-1/2 -translate-y-1/2 rounded-full ${surface}`}
+              />
+            )}
+          </span>
+        )}
+        <div className={`relative md:flex md:h-full ${inner[mode]}`}>
           <span className={`hidden font-bold whitespace-nowrap md:block ${brand[mode]}`}>{t.site.name}</span>
           <ul className={`grid grid-cols-6 md:flex ${list[mode]}`}>
             {sections.map(({ id, icon }) => (
@@ -73,9 +92,12 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
                   to={{ pathname: '/', hash: `#${id}` }}
                   onClick={scrollTo(id)}
                   aria-current={active === id ? 'true' : undefined}
-                  className="flex h-[62px] flex-col items-center justify-center gap-0.5 text-[10.5px] opacity-80 focus-visible:outline-2 focus-visible:-outline-offset-2 aria-[current=true]:bg-(--act) aria-[current=true]:font-bold aria-[current=true]:opacity-100 md:h-[38px] md:flex-row md:justify-start md:gap-2.5 md:px-3 md:text-sm md:rounded-(--r)"
+                  className={`group flex h-[62px] flex-col items-center justify-center gap-0.5 text-[10.5px] opacity-80 focus-visible:outline-2 focus-visible:-outline-offset-2 aria-[current=true]:font-bold aria-[current=true]:opacity-100 md:h-[38px] md:flex-row md:justify-start md:gap-2.5 md:px-3 md:text-sm md:rounded-(--r) ${floating ? 'md:aria-[current=true]:bg-(--act)' : 'aria-[current=true]:bg-(--act)'}`}
                 >
-                  <Icon icon={icon} className="text-xl in-data-[fi=lo]:[--fa-display:none] md:text-base" />
+                  <Icon
+                    icon={icon}
+                    className={`text-xl in-data-[fi=lo]:[--fa-display:none] md:text-base ${floating ? 'transition-transform duration-500 group-aria-[current=true]:-translate-y-[19px] group-aria-[current=true]:text-2xl motion-reduce:transition-none md:group-aria-[current=true]:translate-y-0 md:group-aria-[current=true]:text-base' : ''}`}
+                  />
                   <span>{t.nav.items[id]}</span>
                 </Link>
               </li>

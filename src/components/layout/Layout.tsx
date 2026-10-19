@@ -53,7 +53,7 @@ export function Layout() {
       <Navigation mode={mode} level={level} theme={theme} active={active} />
       {onHome && <StepNav ids={sectionIds} />}
       <div
-        className={`flex min-h-screen flex-col pb-[62px] md:pb-0 md:pt-14`}
+        className={`flex min-h-screen flex-col pb-[78px] md:pb-0 md:pt-14`}
       >
         <main id="main" tabIndex={-1} className="flex-1 px-4 py-8 focus:outline-none">
           <Outlet />
