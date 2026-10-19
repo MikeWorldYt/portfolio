@@ -19,7 +19,7 @@ export function Technologies() {
       <div className="relative">
         <h2 className="mb-2 text-3xl font-bold tracking-tight">{t.technologies.title}</h2>
         <p className="mb-8 opacity-80">{t.technologies.intro}</p>
-        <ul className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-6">
+        <ul className="grid grid-cols-3 gap-x-4 gap-y-8 sm:grid-cols-4 sm:gap-x-6 md:grid-cols-5 lg:grid-cols-6">
           {technologies.map(({ id, label, icon }, index) => (
             <li key={id}>
               <Reveal delay={index * 45}>
