@@ -7,8 +7,7 @@ import type { IntroPhase } from '../../utils/introPhase.ts'
 
 const moveMs = 300
 const actionGapMs = 220
-const pauseMs = 1000
-const buildingMs = 1400
+const pauseMs = 300
 const mobileStepMs = 650
 const wireframeRatio = 0.12
 const alignTolerance = 2
@@ -97,7 +96,7 @@ function draftTransform(final: Box, draft: Draft) {
 }
 
 // Plays the lo-fi entrance on Home. Desktop: four drafted layouts, their actions played one after another,
-// with a 1 s pause between steps,
+// with a 300 ms pause between steps,
 // with a Figma-like selection (purple), rulers (blue) and smart guides (orange). Mobile: elements arrive
 // one by one in their id order (wf-NN-*).
 export function WireframeIntro() {
@@ -233,10 +232,8 @@ export function WireframeIntro() {
     frame = requestAnimationFrame(track)
     lockScroll(true)
     setBuilding(true)
-    timer = window.setTimeout(() => {
-      if (desktop) playDesktop()
-      else playMobile()
-    }, buildingMs)
+    if (desktop) playDesktop()
+    else playMobile()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
