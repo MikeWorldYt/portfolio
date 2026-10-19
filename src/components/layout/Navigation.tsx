@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router'
 import { sections } from '../../data/sections.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
+import { scrollToSection } from '../../utils/stepStops.ts'
 import { Icon } from '../ui/Icon.tsx'
 import type { FidelityLevel } from '../ui/Fidelity.tsx'
 import { LocaleSwitch } from './LocaleSwitch.tsx'
@@ -47,7 +48,7 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
   const scrollTo = (id: string) => (event: React.MouseEvent) => {
     if (!onHome) return
     event.preventDefault()
-    document.getElementById(id)?.scrollIntoView()
+    scrollToSection(id)
   }
 
   return (

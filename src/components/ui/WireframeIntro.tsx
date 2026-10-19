@@ -107,6 +107,12 @@ export function WireframeIntro() {
     const all = [...document.querySelectorAll<HTMLElement>('[id^="wf-"]')]
     const byId = (id: string) => all.find((element) => element.id === id && element.getClientRects().length > 0)
     const showAll = () => all.forEach((element) => (element.dataset.fg = 'in'))
+    // Scrolling is locked while the intro plays; the stable gutter keeps the layout from shifting when it unlocks.
+    const root = document.documentElement
+    const lockScroll = (locked: boolean) => {
+      root.style.overflow = locked ? 'hidden' : ''
+      root.style.scrollbarGutter = locked ? 'stable' : ''
+    }
     const reset = () =>
       all.forEach((element) => {
         element.style.transform = ''
@@ -149,6 +155,7 @@ export function WireframeIntro() {
       setBuilding(false)
       setSelection(null)
       reset()
+      lockScroll(false)
       showAll()
       setIntroPhase('done')
       if (advance) scrollToStop(heroStop(), false)
@@ -219,9 +226,9 @@ export function WireframeIntro() {
     }
 
     frame = requestAnimationFrame(track)
+    lockScroll(true)
     setBuilding(true)
     timer = window.setTimeout(() => {
-      setBuilding(false)
       if (desktop) playDesktop()
       else playMobile()
     }, buildingMs)
@@ -231,18 +238,24 @@ export function WireframeIntro() {
       window.clearTimeout(timer)
       cancelAnimationFrame(frame)
       reset()
+      lockScroll(false)
     }
   }, [reduceMotion])
 
-  if (building) {
-    return (
-      <p role="status" className="pointer-events-none fixed inset-0 z-30 grid place-items-center font-mono text-sm text-gray-500">
-        <span className="animate-pulse motion-reduce:animate-none">{t.home.building}</span>
-      </p>
-    )
-  }
-  if (!selection) return null
-  return <SelectionOverlay {...selection} />
+  // The message stays for the whole intro, low on the screen so it never covers the drafted layout.
+  return (
+    <>
+      {building && (
+        <p
+          role="status"
+          className="pointer-events-none fixed inset-x-0 bottom-20 z-30 text-center font-mono text-sm text-gray-500 md:bottom-8"
+        >
+          <span className="animate-pulse motion-reduce:animate-none">{t.home.building}</span>
+        </p>
+      )}
+      {selection && <SelectionOverlay {...selection} />}
+    </>
+  )
 }
 
 function SelectionOverlay({ box, placed }: Selection) {
