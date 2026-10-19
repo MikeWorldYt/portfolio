@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
+import { scrollToSection } from '../../utils/stepStops.ts'
 
 type ButtonProps = {
   to: string
@@ -27,9 +28,14 @@ const variants = {
 export function Button({ to, variant = 'primary', size = 'md', children }: ButtonProps) {
   const className = `${base} ${sizes[size]} ${variants[variant]}`
 
+  // Same smooth scroll as the nav links; a native hash jump would be cut short by the instant hash landing.
   if (to.startsWith('#')) {
+    const onClick = (event: React.MouseEvent) => {
+      event.preventDefault()
+      scrollToSection(to.slice(1))
+    }
     return (
-      <a href={to} className={className}>
+      <a href={to} onClick={onClick} className={className}>
         {children}
       </a>
     )
