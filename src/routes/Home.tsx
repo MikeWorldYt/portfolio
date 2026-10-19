@@ -8,7 +8,7 @@ import { Technologies } from '../components/sections/Technologies.tsx'
 import { Fidelity } from '../components/ui/Fidelity.tsx'
 import { Icon } from '../components/ui/Icon.tsx'
 import { ImagePlaceholder } from '../components/ui/ImagePlaceholder.tsx'
-import { entranceOffset, WireframeIntro } from '../components/ui/WireframeIntro.tsx'
+import { WireframeIntro } from '../components/ui/WireframeIntro.tsx'
 import { useHeroProgress } from '../hooks/useHeroProgress.ts'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion.ts'
 import { useLocale } from '../i18n/useLocale.ts'
@@ -30,7 +30,7 @@ export function Home() {
             level={level}
             className="sticky top-[calc((100vh-var(--H))/2)] mt-[calc((100vh-var(--H))/2)] [--H:min(56vh,440px)]"
           >
-            <div data-fg-step="1" className="fg-item" style={entranceOffset(40, 30)}>
+            <div id="wf-01-image" data-fg-from="right bottom" className="fg-item">
               <ImagePlaceholder label={t.home.imageAlt} className="h-(--H) [--x:calc(1_-_var(--t))]">
                 <Icon icon={faUser} className="text-7xl opacity-70" />
               </ImagePlaceholder>

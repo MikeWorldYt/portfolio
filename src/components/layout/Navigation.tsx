@@ -54,6 +54,8 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
     <>
       <LocaleSwitch className="fixed top-2 right-2 z-10 md:hidden" />
       <nav
+        id={onHome ? 'wf-00-navbar' : undefined}
+        data-fg-from="left"
         data-fi={level}
         data-theme={theme}
         aria-label={t.nav.label}

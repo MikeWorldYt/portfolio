@@ -1,14 +1,31 @@
-/* Lo-fi hero dressed as a design tool: Figma-blue hover, elements dropping into place one by one. */
+/* Lo-fi hero dressed as a design tool: Figma-blue hover, elements dropping into place one by one.
+   Elements are tagged id="wf-NN-name" (NN = entrance order) and data-fg-from="left|right top|bottom". */
 @layer components {
-  [data-fg-step] {
+  [id^='wf-'] {
     transition:
       opacity 0.3s ease,
       translate 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  [data-fg-step]:not([data-fg='in']) {
+  [id^='wf-']:not([data-fg='in']) {
     opacity: 0;
     translate: var(--fg-dx, 0) var(--fg-dy, 0);
+  }
+
+  [data-fg-from~='left'] {
+    --fg-dx: -40px;
+  }
+
+  [data-fg-from~='right'] {
+    --fg-dx: 40px;
+  }
+
+  [data-fg-from~='top'] {
+    --fg-dy: -24px;
+  }
+
+  [data-fg-from~='bottom'] {
+    --fg-dy: 24px;
   }
 
   [data-fi='lo'] .fg-item:hover {
@@ -23,7 +40,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    [data-fg-step] {
+    [id^='wf-'] {
       transition: none;
     }
   }
