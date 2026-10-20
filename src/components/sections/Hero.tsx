@@ -19,7 +19,7 @@ export function Hero({ level, progress }: { level: 'lo' | 'mid'; progress: numbe
     <section id="home" className={reduceMotion ? 'min-h-[90vh] py-16' : '-mt-8 h-[170vh]'}>
       <Fidelity
         level={level}
-        className={`flex flex-col justify-center gap-5 ${reduceMotion ? '' : 'sticky top-0 h-[calc(100vh-62px)] md:top-14 md:h-[calc(100vh-3.5rem)]'}`}
+        className={`flex flex-col justify-start gap-5 pt-12 md:justify-center md:pt-0 ${reduceMotion ? '' : 'sticky top-0 h-[calc(100vh-62px)] md:top-14 md:h-[calc(100vh-3.5rem)]'}`}
       >
         <div id="wf-01-image-mobile" data-fg-from="bottom" className="fg-item md:hidden">
           <ImagePlaceholder label={t.home.imageAlt} className="h-[min(26vh,200px)] [--x:calc(1_-_var(--t))]">
