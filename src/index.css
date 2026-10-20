@@ -95,7 +95,7 @@ html {
   --sh:
     inset 0 1px 0 rgb(255 255 255 / 0.18),
     0 10px 30px rgb(0 0 0 / 0.35);
-  --ph: linear-gradient(135deg, rgb(99 102 241 / 0.35), rgb(255 255 255 / 0.06));
+  --ph: linear-gradient(135deg, #3a3d7a, #23283a);
   --act: rgb(255 255 255 / 0.12);
 }
 
