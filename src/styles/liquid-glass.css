@@ -90,6 +90,11 @@
     text-align: center;
   }
 
+  /* White labels stay legible when a bright shape drifts behind them; invisible over the dark water. */
+  [data-theme='dark'] .lg-label {
+    text-shadow: 0 1px 3px rgb(0 0 0 / 0.6);
+  }
+
   .lg-glass {
     --pull-x: 0px;
     --pull-y: 0px;
