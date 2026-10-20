@@ -5,7 +5,7 @@ import { useLocale } from '../../i18n/useLocale.ts'
 import { ProjectCard } from './ProjectCard.tsx'
 
 const swipeRatio = 0.2
-const stepDeg = 13
+const stepDeg = 12
 
 // Mobile projects as a circular list laid on a wheel: the current card fills the screen, its neighbours
 // tilt away at the sides. Dragging turns the wheel with the finger; the ends wrap around.
@@ -63,7 +63,7 @@ export function ProjectCarousel({ projects }: { projects: readonly ProjectData[]
       aria-label={t.projects.carousel}
       tabIndex={0}
       onKeyDown={onKeyDown}
-      className="-mx-4 mb-6 overflow-x-clip px-4 pb-10 focus-visible:outline-2"
+      className="-mx-4 mb-6 overflow-x-clip px-8 pb-4 focus-visible:outline-2"
     >
       <div
         onPointerDown={onPointerDown}
@@ -92,6 +92,15 @@ export function ProjectCarousel({ projects }: { projects: readonly ProjectData[]
             </div>
           )
         })}
+      </div>
+      {/* Position dots: the neighbours peeking at the edges hint at the swipe, the dots say where you are. */}
+      <div aria-hidden="true" className="mt-8 flex justify-center gap-2">
+        {projects.map((project, position) => (
+          <span
+            key={project.id}
+            className={`h-2 rounded-full bg-current transition-[width,opacity] duration-300 motion-reduce:transition-none ${position === index ? 'w-6 opacity-90' : 'w-2 opacity-35'}`}
+          />
+        ))}
       </div>
     </div>
   )
