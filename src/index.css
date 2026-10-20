@@ -46,6 +46,11 @@
   --t: 0;
 }
 
+/* Explicit canvas: a transparent page would show whatever the host paints behind it (dark in dark embeds). */
+html {
+  background-color: #fff;
+}
+
 /* Registered so the mobile nav's notch and bubble can glide between items. */
 @property --notch {
   syntax: '<percentage>';
@@ -90,7 +95,7 @@
   --sh:
     inset 0 1px 0 rgb(255 255 255 / 0.18),
     0 10px 30px rgb(0 0 0 / 0.35);
-  --ph: linear-gradient(135deg, rgb(99 102 241 / 0.35), rgb(255 255 255 / 0.06));
+  --ph: linear-gradient(135deg, #3a3d7a, #23283a);
   --act: rgb(255 255 255 / 0.12);
 }
 
@@ -182,7 +187,7 @@
 /* Keeps section headings readable over the floating background shapes. */
 [data-theme='dark'] h2  {
   /* color: #1249b8; */
-  filter: drop-shadow(3px 2px 3px #c3c3c38d);
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.5));
 }
 
 /* Project cards in the dark theme bend the backdrop like the tiles (Chromium); unlayered so it beats the fx utility. */

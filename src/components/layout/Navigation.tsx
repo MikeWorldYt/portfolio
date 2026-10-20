@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router'
 import type { CSSProperties } from 'react'
 import { sections } from '../../data/sections.ts'
+import { useShowOnScrollUp } from '../../hooks/useShowOnScrollUp.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
 import { scrollToSection } from '../../utils/stepStops.ts'
 import { Icon } from '../ui/Icon.tsx'
@@ -45,6 +46,7 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
   const { t } = useLocale()
   const { pathname } = useLocation()
   const onHome = pathname === '/'
+  const localeShown = useShowOnScrollUp()
   // Mobile hi-fi: a floating bar whose active item rises into a bubble sitting in a notch of the bar.
   const floating = level === 'hi'
   const activeIndex = sections.findIndex(({ id }) => id === active)
@@ -60,7 +62,13 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
   return (
     <>
       <div id={onHome ? 'wf-09-locale' : undefined} data-fg-from="top" className="fixed top-2 right-2 z-10 md:hidden">
-        <LocaleSwitch />
+        {/* Out of the way while reading down the page; back on scroll up or at the top. */}
+        <div
+          inert={!localeShown}
+          className={`transition-[opacity,translate] duration-300 motion-reduce:transition-none ${localeShown ? '' : '-translate-y-3 opacity-0'}`}
+        >
+          <LocaleSwitch className="min-h-11 min-w-11 [--sh:0_4px_12px_rgb(0_0_0/0.18)]" />
+        </div>
       </div>
       <nav
         id={onHome ? 'wf-00-navbar' : undefined}
@@ -71,8 +79,9 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
         style={notch}
         className={`fixed z-10 text-(--c) md:inset-x-auto md:top-0 md:bottom-auto md:left-0 md:overflow-hidden md:pb-0 ${floating ? 'inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] transition-[--notch] duration-500 ease-[cubic-bezier(0.34,1.3,0.64,1)] motion-reduce:transition-none md:fx-nav' : 'fx-nav inset-x-0 bottom-0 fx-edge-t pb-[env(safe-area-inset-bottom)]'} ${shape[mode]}`}
       >
+        {/* On a white page the light bar needs an outline; a drop-shadow hugs the notch, a border would be masked away. */}
         {floating && (
-          <span aria-hidden="true" className="md:hidden">
+          <span aria-hidden="true" className={`absolute inset-0 md:hidden ${theme === 'dark' ? '' : '[filter:drop-shadow(0_0_0.5px_#000)_drop-shadow(0_0_0.5px_#000)]'}`}>
             <span
               className={`absolute inset-0 rounded-2xl ${surface} ${activeIndex >= 0 ? '[mask:radial-gradient(circle_at_var(--notch)_4px,transparent_33px,#000_34px)]' : ''}`}
             />
@@ -92,7 +101,7 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
                   to={{ pathname: '/', hash: `#${id}` }}
                   onClick={scrollTo(id)}
                   aria-current={active === id ? 'true' : undefined}
-                  className={`group flex h-[62px] flex-col items-center justify-center gap-0.5 text-[10.5px] opacity-80 focus-visible:outline-2 focus-visible:-outline-offset-2 aria-[current=true]:font-bold aria-[current=true]:opacity-100 md:h-[38px] md:flex-row md:justify-start md:gap-2.5 md:px-3 md:text-sm md:rounded-(--r) ${floating ? 'md:aria-[current=true]:bg-(--act)' : 'aria-[current=true]:bg-(--act)'}`}
+                  className={`group flex h-[62px] flex-col items-center justify-center gap-0.5 text-[11px] opacity-80 focus-visible:outline-2 focus-visible:-outline-offset-2 aria-[current=true]:font-bold aria-[current=true]:opacity-100 md:h-[38px] md:flex-row md:justify-start md:gap-2.5 md:px-3 md:text-sm md:rounded-(--r) ${floating ? 'md:aria-[current=true]:bg-(--act)' : 'aria-[current=true]:bg-(--act)'}`}
                 >
                   <Icon
                     icon={icon}
