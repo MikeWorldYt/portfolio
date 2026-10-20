@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router'
 import type { CSSProperties } from 'react'
 import { sections } from '../../data/sections.ts'
+import { useShowOnScrollUp } from '../../hooks/useShowOnScrollUp.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
 import { scrollToSection } from '../../utils/stepStops.ts'
 import { Icon } from '../ui/Icon.tsx'
@@ -45,6 +46,7 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
   const { t } = useLocale()
   const { pathname } = useLocation()
   const onHome = pathname === '/'
+  const localeShown = useShowOnScrollUp()
   // Mobile hi-fi: a floating bar whose active item rises into a bubble sitting in a notch of the bar.
   const floating = level === 'hi'
   const activeIndex = sections.findIndex(({ id }) => id === active)
@@ -60,7 +62,13 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
   return (
     <>
       <div id={onHome ? 'wf-09-locale' : undefined} data-fg-from="top" className="fixed top-2 right-2 z-10 md:hidden">
-        <LocaleSwitch className="min-h-11 min-w-11" />
+        {/* Out of the way while reading down the page; back on scroll up or at the top. */}
+        <div
+          inert={!localeShown}
+          className={`transition-[opacity,translate] duration-300 motion-reduce:transition-none ${localeShown ? '' : '-translate-y-3 opacity-0'}`}
+        >
+          <LocaleSwitch className="min-h-11 min-w-11 [--sh:0_4px_12px_rgb(0_0_0/0.18)]" />
+        </div>
       </div>
       <nav
         id={onHome ? 'wf-00-navbar' : undefined}
