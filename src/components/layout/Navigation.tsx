@@ -71,8 +71,9 @@ export function Navigation({ mode, level, theme, active }: NavigationProps) {
         style={notch}
         className={`fixed z-10 text-(--c) md:inset-x-auto md:top-0 md:bottom-auto md:left-0 md:overflow-hidden md:pb-0 ${floating ? 'inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] transition-[--notch] duration-500 ease-[cubic-bezier(0.34,1.3,0.64,1)] motion-reduce:transition-none md:fx-nav' : 'fx-nav inset-x-0 bottom-0 fx-edge-t pb-[env(safe-area-inset-bottom)]'} ${shape[mode]}`}
       >
+        {/* On a white page the light bar needs an outline; a drop-shadow hugs the notch, a border would be masked away. */}
         {floating && (
-          <span aria-hidden="true" className="md:hidden">
+          <span aria-hidden="true" className={`absolute inset-0 md:hidden ${theme === 'dark' ? '' : '[filter:drop-shadow(0_0_0.5px_#000)_drop-shadow(0_0_0.5px_#000)]'}`}>
             <span
               className={`absolute inset-0 rounded-2xl ${surface} ${activeIndex >= 0 ? '[mask:radial-gradient(circle_at_var(--notch)_4px,transparent_33px,#000_34px)]' : ''}`}
             />
