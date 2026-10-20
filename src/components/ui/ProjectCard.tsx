@@ -7,7 +7,7 @@ import { Icon } from './Icon.tsx'
 import { ImagePlaceholder } from './ImagePlaceholder.tsx'
 
 const linkClass =
-  'inline-flex items-center gap-1.5 text-sm font-semibold text-indigo-600 in-data-[theme=dark]:text-indigo-300 focus-visible:outline-2 focus-visible:outline-offset-2'
+  'inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-indigo-600 in-data-[theme=dark]:text-indigo-300 focus-visible:outline-2 focus-visible:outline-offset-2'
 
 export function ProjectCard({ project }: { project: ProjectData }) {
   const { t } = useLocale()
