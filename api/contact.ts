@@ -8,6 +8,10 @@ const minMessageLength = 10
 const maxLength = { name: 200, email: 320, message: 5000 }
 const rateLimit = { max: 5, windowMs: 10 * 60 * 1000 }
 
+const turnstileTimeoutMs = 5000
+
+class CaptchaUnavailable extends Error {}
+
 const reply = (status: number, error?: string) =>
   Response.json(error ? { error } : { ok: true }, { status })
 
@@ -27,9 +31,11 @@ function isValid(name: string, email: string, message: string) {
 async function isHuman(token: string, ip: string | null) {
   const body = new URLSearchParams({ secret: process.env.TURNSTILE_SECRET_KEY ?? '', response: token })
   if (ip) body.set('remoteip', ip)
-  const res = await fetch(turnstileUrl, { method: 'POST', body })
-  const data = (await res.json()) as { success: boolean }
-  return data.success
+  const res = await fetch(turnstileUrl, { method: 'POST', body, signal: AbortSignal.timeout(turnstileTimeoutMs) })
+  if (!res.ok) throw new CaptchaUnavailable(`siteverify responded ${res.status}`)
+  const data = (await res.json().catch(() => null)) as { success?: boolean } | null
+  if (!data) throw new CaptchaUnavailable('siteverify returned non-JSON')
+  return data.success === true
 }
 
 const clientIp = (request: Request) =>
@@ -88,7 +94,10 @@ export async function POST(request: Request) {
     await saveMessage(name, email, message)
     return reply(200)
   } catch (error) {
-    console.error('Contact store failed', error)
+    console.error('Contact request failed', error)
+    if (error instanceof CaptchaUnavailable || (error instanceof Error && error.name === 'TimeoutError')) {
+      return reply(503, 'captcha_unavailable')
+    }
     return reply(500, 'server_error')
   }
 }
