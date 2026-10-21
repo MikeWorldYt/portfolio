@@ -12,9 +12,9 @@ export function ContactCta() {
       <div className="relative px-6 py-12 text-center text-white">
         {/* Painted below the background shapes so they float over the panel; the content stays on top. */}
         <div aria-hidden="true" className="absolute inset-0 -z-20 rounded-2xl bg-indigo-600" />
-        <h2 className="mb-2 text-3xl font-bold">{t.contactCta.title}</h2>
-        <p className="mb-4 opacity-90 [text-shadow:0_1px_3px_rgb(0_0_0/0.6)]">{t.contactCta.text}</p>
-        <span className="relative z-1 inline-block">
+        <h2 className="scroll-rise mb-2 text-3xl font-bold">{t.contactCta.title}</h2>
+        <p className="scroll-rise mb-4 opacity-90 [text-shadow:0_1px_3px_rgb(0_0_0/0.6)]">{t.contactCta.text}</p>
+        <span className="scroll-rise relative z-1 inline-block">
           <Button to="/contact" variant="light">
             {t.contactCta.cta}
             <Icon icon={faArrowRight} />

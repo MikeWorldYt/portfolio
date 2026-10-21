@@ -1,4 +1,5 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { useEffect, useRef } from 'react'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion.ts'
 import { useLocale } from '../../i18n/useLocale.ts'
 import { Button } from '../ui/Button.tsx'
@@ -14,9 +15,30 @@ const clamp = (value: number) => Math.min(1, Math.max(0, value))
 export function Hero({ level, progress }: { level: 'lo' | 'mid'; progress: number }) {
   const { t } = useLocale()
   const reduceMotion = usePrefersReducedMotion()
+  const sectionRef = useRef<HTMLElement>(null)
+
+  // The pinned block is a full screen tall with its content centred, so it ends in empty space; the next
+  // section is pulled up over that space instead of waiting below it.
+  useEffect(() => {
+    const section = sectionRef.current
+    const stage = section?.firstElementChild
+    const last = stage?.lastElementChild
+    if (!section || !(stage instanceof HTMLElement) || !(last instanceof HTMLElement) || reduceMotion) return
+    // Layout offsets, not rects: the scroll-linked fade translates the content while it leaves.
+    const fit = () => {
+      section.style.marginBottom = `${-(stage.offsetHeight - last.offsetTop - last.offsetHeight)}px`
+    }
+    const observer = new ResizeObserver(fit)
+    observer.observe(stage)
+    observer.observe(last)
+    return () => {
+      observer.disconnect()
+      section.style.marginBottom = ''
+    }
+  }, [reduceMotion])
 
   return (
-    <section id="home" className={reduceMotion ? 'min-h-[90vh] py-16' : '-mt-8 h-[170vh]'}>
+    <section ref={sectionRef} id="home" className={reduceMotion ? 'min-h-[90vh] py-[8vh]' : '-mt-[4vh] h-[135vh]'}>
       <Fidelity
         level={level}
         className={`flex flex-col justify-center gap-5 ${reduceMotion ? '' : 'sticky top-0 h-[calc(100vh-62px)] md:top-14 md:h-[calc(100vh-3.5rem)]'}`}
@@ -26,7 +48,7 @@ export function Hero({ level, progress }: { level: 'lo' | 'mid'; progress: numbe
             <Icon icon={faUser} className="text-5xl" />
           </ImagePlaceholder>
         </div>
-        <div>
+        <div className="scroll-leave">
           <div className="mb-3 grid">
             <span
               id="wf-02-tag"
@@ -55,15 +77,17 @@ export function Hero({ level, progress }: { level: 'lo' | 'mid'; progress: numbe
           </p>
         </div>
         {/* One button for both layers: the lo-fi placeholder label turns into the real call to action. */}
-        <div id="wf-08-cta" data-fg-from="bottom" className="fg-item w-fit">
-          <Button to="contact" variant="fx" size="lg">
-            <span className="grid justify-items-center">
-              <span aria-hidden="true" className="col-start-1 row-start-1 opacity-[calc(1_-_var(--t))]">
-                {t.home.wireCta}
+        <div className="scroll-leave">
+          <div id="wf-08-cta" data-fg-from="bottom" className="fg-item w-fit">
+            <Button to="contact" variant="fx" size="lg">
+              <span className="grid justify-items-center">
+                <span aria-hidden="true" className="col-start-1 row-start-1 opacity-[calc(1_-_var(--t))]">
+                  {t.home.wireCta}
+                </span>
+                <span className="col-start-1 row-start-1 opacity-(--t)">{t.home.cta}</span>
               </span>
-              <span className="col-start-1 row-start-1 opacity-(--t)">{t.home.cta}</span>
-            </span>
-          </Button>
+            </Button>
+          </div>
         </div>
       </Fidelity>
     </section>
