@@ -14,7 +14,7 @@ export function Skills() {
           // A small per-chip offset in the range staggers chips that share a row.
           <li
             key={skill}
-            style={{ animationRange: `entry ${index * 3}% cover ${30 + index * 3}%` }}
+            style={{ animationRange: `entry ${index * 4}% cover ${18 + index}%` }}
             className="fx scroll-rise rounded-full px-4 py-2"
           >
             {t.skills.items[skill]}

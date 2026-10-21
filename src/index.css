@@ -132,7 +132,7 @@ html {
     @media (prefers-reduced-motion: no-preference) {
       animation: scroll-rise linear both;
       animation-timeline: view();
-      animation-range: entry 0% cover 30%;
+      animation-range: entry 0% cover 18%;
     }
   }
 }

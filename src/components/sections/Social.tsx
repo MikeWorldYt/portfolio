@@ -8,11 +8,11 @@ export function Social() {
 
   return (
     <Section id="social" level="hi">
-      <h2 className="mb-2 text-3xl font-bold">{t.social.title}</h2>
-      <p className="mb-4">{t.social.intro}</p>
+      <h2 className="scroll-rise mb-2 text-3xl font-bold">{t.social.title}</h2>
+      <p className="scroll-rise mb-4">{t.social.intro}</p>
       <ul className="flex flex-wrap gap-3">
-        {socialProfiles.map(({ id, label, url, icon }) => (
-          <li key={id}>
+        {socialProfiles.map(({ id, label, url, icon }, index) => (
+          <li key={id} style={{ animationRange: `entry ${index * 5}% cover ${18 + index}%` }} className="scroll-rise">
             <a
               href={url}
               target="_blank"
