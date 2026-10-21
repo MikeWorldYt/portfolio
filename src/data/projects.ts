@@ -3,7 +3,7 @@ export const projects = [
     id: 'yuuka',
     repo: 'https://github.com/MikeWorldYt/ai-personalities',
     video: '/projects/yuuka_agent.mp4',
-    tags: ['AI Agent', , 'Google Cloud', 'Meta Graph', 'Cloudflare Workers', 'TypeScript', 'Postgres'],
+    tags: ['AI Agent', 'Google Cloud', 'Meta Graph', 'Cloudflare Workers', 'TypeScript', 'Postgres'],
   },
   {
     id: 'antSystem',
