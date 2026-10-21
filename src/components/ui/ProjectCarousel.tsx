@@ -63,7 +63,7 @@ export function ProjectCarousel({ projects }: { projects: readonly ProjectData[]
       aria-label={t.projects.carousel}
       tabIndex={0}
       onKeyDown={onKeyDown}
-      className="-mx-4 mb-6 overflow-x-clip px-8 pb-4 focus-visible:outline-2"
+      className="-mx-[4vw] mb-6 overflow-x-clip px-8 pb-4 focus-visible:outline-2"
     >
       <div
         onPointerDown={onPointerDown}

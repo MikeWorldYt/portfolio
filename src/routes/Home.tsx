@@ -28,7 +28,7 @@ export function Home() {
         <aside aria-hidden="true" className="hidden md:block">
           <Fidelity
             level={level}
-            className="sticky top-[calc(3.5rem+(100vh-3.5rem-var(--H))/2)] mt-[calc((100vh-3.5rem-var(--H))/2-2rem)] [--H:min(56vh,440px)]"
+            className="sticky top-[calc(3.5rem+(100vh-3.5rem-var(--H))/2)] mt-[calc((100vh-3.5rem-var(--H))/2-4vh)] [--H:min(56vh,440px)]"
           >
             <div id="wf-01-image" data-fg-from="bottom" className="fg-item">
               <ImagePlaceholder label={t.home.imageAlt} className="h-(--H) [--x:calc(1_-_var(--t))]">

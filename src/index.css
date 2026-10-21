@@ -118,6 +118,43 @@ html {
   --act: rgb(255 255 255 / 0.12);
 }
 
+/* Scroll-linked entrance: rises in while the element enters the viewport and reverses when scrolling back up.
+   Browsers without scroll timelines simply show the element. */
+@keyframes scroll-rise {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+}
+
+@utility scroll-rise {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: scroll-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+  }
+}
+
+/* The mirror of scroll-rise: fades and lifts out while the element leaves through the top. */
+@keyframes scroll-leave {
+  to {
+    opacity: 0;
+    translate: 0 -1.25rem;
+  }
+}
+
+@utility scroll-leave {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: scroll-leave linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 70%;
+    }
+  }
+}
+
 @utility fx-text {
   color: var(--c);
   font-family: var(--ff);
