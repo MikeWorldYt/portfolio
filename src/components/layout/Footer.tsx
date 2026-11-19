@@ -12,7 +12,7 @@ export function Footer() {
       data-theme={theme}
       className="fx-text border-t border-(color:--bd) px-4 py-6 text-center text-sm"
     >
-      © {new Date().getFullYear()} MikeWorld™. {t.footer.rights}.
+      © {new Date().getFullYear()} {t.site.name}. {t.footer.rights}.
     </footer>
   )
 }
