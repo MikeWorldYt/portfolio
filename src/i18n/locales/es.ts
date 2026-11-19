@@ -2,10 +2,10 @@ import type { Dictionary } from '../types.ts'
 
 export const es: Dictionary = {
   site: {
-    name: 'Portafolio',
+    name: 'MikeWorld™',
   },
   meta: {
-    title: 'Mike | Product Engineer · UX',
+    title: 'Mike Diaz | Product Engineer · UX',
     description: 'Portafolio de un Product Engineer: productos digitales con visión de UX y profundidad técnica, acelerados con IA.',
   },
   nav: {
